@@ -1,0 +1,14 @@
+IMPORTANT CONTEXT FOR AI AGENT:
+
+1. ACTIVE PROJECT: "understanding_Technical_Indicators"
+   - All new code, scripts, and content MUST be created in this directory.
+   - We are building a "Forensic Tool" for trading analysis here.
+   - unless until user explicitly ask to generate audio mp3 file, do not generate any audio mp3 file.
+
+2. REFERENCE ONLY: "git-infographic"
+   - This directory is legacy/reference.
+   - Do NOT modify files here unless explicitly asked to restore something (like we did with narration.json).
+   - Use this code only to learn from its animation/visualization patterns.
+
+3. GOAL: Create a video "How To Calculate Technical Indicators For Trading Using Pandas".
+

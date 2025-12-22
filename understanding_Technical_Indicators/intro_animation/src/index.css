@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+/* Custom Cinematic Styles */
+body {
+  background-color: #FDFBF7;
+  /* Soft creamy brownish theme */
+  overflow: hidden;
+  /* No scrollbars for animation */
+}
