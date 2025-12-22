@@ -1,0 +1,87 @@
+[
+    {
+        "id": "intro",
+        "text": "You use Git every single day. Commit, push, pull. It works. Until it doesn’t. And then you’re Googling 'how to undo git rebase at 11:00 PM,' mass copying commands from Stack Overflow, praying you don’t make it worse. An uncomfortable truth is many experienced developers don’t actually understand Git. They memorize commands, but they don’t know what’s happening underneath. In the next few minutes, let’s understand Git better and never fear it again.",
+        "moduleId": "intro"
+    },
+    {
+        "id": "snapshot",
+        "text": "Let’s start from zero. Forget everything you think you know. Git is a database. And the fundamental unit of that database is the commit. So, what is a commit? It’s a snapshot. A complete photograph of your entire project at one moment in time. Not the changes you made—the entire state of every file. Each commit contains three things: a pointer to that complete snapshot, metadata about who created it and why, and a pointer to the parent commit.",
+        "moduleId": "snapshot"
+    },
+    {
+        "id": "dag",
+        "text": "When you make a new commit, Git saves the full state and links it back to where you were. This creates a chain. Parents never know their future children; children point backwards to parents. This structure has a name: a DAG. Directed Acyclic Graph. Directed means the links go one way. Acyclic means no loops. This graph is your project’s history.",
+        "moduleId": "dag"
+    },
+    {
+        "id": "branches_1",
+        "text": "Now how do we move around this graph? Branches. Most people think branches are heavy copies of code. That’s wrong. A branch is just a pointer. A tiny sticky note that stores one thing: the hash of a commit. Branches don’t contain commits. They point to them.",
+        "moduleId": "branches"
+    },
+    {
+        "id": "branches_2",
+        "text": "When you make a new commit on a branch, Git creates the commit pointing back to the previous one, and then moves the branch pointer forward. That’s it. This is why creating a branch is instant. Nothing is copied. You’re just moving a sticky note.",
+        "moduleId": "branches"
+    },
+    {
+        "id": "head",
+        "text": "So we have commits and branches. But how does Git know where YOU are? Meet HEAD. HEAD is another pointer. Most of the time, it points to a branch like 'main'. But if you checkout a specific commit hash, HEAD detaches and points directly to that commit. If you commit now, no branch follows you. Those commits become orphaned, floating in space.",
+        "moduleId": "head"
+    },
+    {
+        "id": "three_areas",
+        "text": "Before we talk about undoing things, we need to understand the Three Areas. One: the Working Directory—your actual files on disk. Two: the Staging Area, also called the Index—what will go into the next commit. Three: the Repository—your permanent history. Git commands manipulate these layers differently.",
+        "moduleId": "three_areas"
+    },
+    {
+        "id": "undo_intro",
+        "text": "Now we can talk about undoing things. Three commands seem to do the same job, but they are completely different. Confusion here costs work. Let’s break them down: Checkout, Reset, and Revert.",
+        "moduleId": "undo"
+    },
+    {
+        "id": "undo_checkout",
+        "text": "Checkout moves HEAD. That’s its only job. It updates your working directory to match a snapshot, but it does not change history. No commits are removed. No branches are rewritten. Checkout is safe and non-destructive.",
+        "moduleId": "undo"
+    },
+    {
+        "id": "undo_reset_intro",
+        "text": "Reset is very different. Reset does not move HEAD. It moves a BRANCH pointer. This means reset rewrites history. That’s why reset is dangerous, especially on shared branches.",
+        "moduleId": "undo"
+    },
+    {
+        "id": "undo_reset_soft",
+        "text": "Reset --soft moves the branch pointer only. Your working directory stays untouched. Your changes remain staged in the index, ready to be recommitted.",
+        "moduleId": "undo"
+    },
+    {
+        "id": "undo_reset_mixed",
+        "text": "Reset --mixed moves the branch pointer and clears the staging area. Your changes are not lost. They stay in the working directory as modified files.",
+        "moduleId": "undo"
+    },
+    {
+        "id": "undo_reset_hard",
+        "text": "Reset --hard moves the branch pointer and resets everything. The staging area is cleared. The working directory is overwritten. Changes are destroyed. Gone forever—unless you know about reflog.",
+        "moduleId": "undo"
+    },
+    {
+        "id": "undo_revert",
+        "text": "Revert takes a completely different approach. It does not move pointers at all. Instead, it creates a new commit that undoes the effects of an old one. History is preserved and moves forward. This is the only safe way to undo changes on shared branches.",
+        "moduleId": "undo"
+    },
+    {
+        "id": "rebase_1",
+        "text": "Finally, rebase. There are two ways to combine branches. Merge ties two histories together and preserves the truth. Rebase rewrites history by replaying your commits on top of a new base. Git creates brand new commits with new hashes and discards the old ones.",
+        "moduleId": "rebase"
+    },
+    {
+        "id": "rebase_2",
+        "text": "This is why you never rebase shared branches. If you rewrite history that others have pulled, conflicts explode. But for cleaning up your own local history, rebase is powerful.",
+        "moduleId": "rebase"
+    },
+    {
+        "id": "reflog",
+        "text": "One last thing. You made a mistake. You ran reset --hard. Commits are gone. Run git reflog. Reflog records everywhere HEAD has pointed recently. Those lost commits are usually still there. Find the hash, move a branch to it, and you’re saved.",
+        "moduleId": "reflog"
+    }
+]
