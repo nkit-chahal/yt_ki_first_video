@@ -1,0 +1,27 @@
+[
+    {
+        "scene": 1,
+        "text": "Here is your daily dose of Python riddle! Can you solve this?",
+        "duration": "3s"
+    },
+    {
+        "scene": 2,
+        "text": "What does this Python code print? Look carefully at the tuple...",
+        "duration": "8s"
+    },
+    {
+        "scene": 3,
+        "text": "3... 2... 1... Time's up!",
+        "duration": "5s"
+    },
+    {
+        "scene": 4,
+        "text": "The answer is... the tuple with a modified list inside! Tuples are immutable, but their mutable elements can still change!",
+        "duration": "4s"
+    },
+    {
+        "scene": 5,
+        "text": "Were you right? Drop your answer in the comments! Follow for more Python riddles!",
+        "duration": "4s"
+    }
+]
