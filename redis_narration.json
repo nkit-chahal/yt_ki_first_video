@@ -1,0 +1,32 @@
+[
+    {
+        "id": "intro",
+        "text": "Your app is slow. Users are leaving. And the problem isn't your code—it's your database. Every query hits the disk, and disk is slow. We're talking 200 milliseconds per read. That's a lifetime in computing. But what if you could store everything in RAM? That's Redis. Sub-millisecond access. Let me show you how it works.",
+        "moduleId": "scene1"
+    },
+    {
+        "id": "basics",
+        "text": "Forget SQL. Forget tables. Redis is brutally simple. You give it a key. It gives you a value. That's it. No joins. No schemas. No overhead. Just... set a key, get a key. Watch how fast this is. The data doesn't even touch the disk—it lives in memory, ready to go.",
+        "moduleId": "scene2"
+    },
+    {
+        "id": "structures",
+        "text": "But here's where it gets interesting. Redis isn't just storing strings. It has Lists—perfect for job queues. Sets—for when you need unique items. And Hashes—basically Python dictionaries living inside your database. You're not just caching data anymore. You're building real data structures at the speed of RAM.",
+        "moduleId": "scene3"
+    },
+    {
+        "id": "caching",
+        "text": "Now, the killer feature. Time To Live. You can tell Redis: 'Store this session for 5 seconds, then delete it.' It self-destructs. No cron jobs. No cleanup scripts. The data just... expires. This is how Netflix handles millions of sessions. This is how Twitter caches your timeline. And now, you can do it with 3 lines of Python.",
+        "moduleId": "scene4"
+    },
+    {
+        "id": "pubsub",
+        "text": "What about real-time? Chat apps. Live notifications. Stock tickers. Redis has Pub/Sub built in. A publisher pushes a message to a channel, and every subscriber gets it—instantly. No polling. No WebSocket complexity. Just publish, subscribe, done. Watch as one message fans out to everyone listening.",
+        "moduleId": "scene5"
+    },
+    {
+        "id": "outro",
+        "text": "Here's the truth: Your database is holding you back. Redis isn't a replacement—it's a supercharger. In-memory speed. Native data structures. Smart caching. Real-time messaging. All in one tool. Stop waiting on disk. Start building faster. This is Redis with Python. And now you know how it works.",
+        "moduleId": "scene6"
+    }
+]

@@ -1,0 +1,27 @@
+[
+    {
+        "scene": 1,
+        "text": "Wait. Before I show the answer... can YOU solve this?",
+        "duration": "3s"
+    },
+    {
+        "scene": 2,
+        "text": "What does this Python code print? Look carefully...",
+        "duration": "5s"
+    },
+    {
+        "scene": 3,
+        "text": "3... 2... 1... Time's up!",
+        "duration": "5s"
+    },
+    {
+        "scene": 4,
+        "text": "The answer is... 3 lists that are all the same! List multiplication creates references, not copies!",
+        "duration": "3s"
+    },
+    {
+        "scene": 5,
+        "text": "Were you right? Drop your answer in the comments! Follow for more Python riddles!",
+        "duration": "4s"
+    }
+]

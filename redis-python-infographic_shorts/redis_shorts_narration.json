@@ -1,0 +1,32 @@
+[
+    {
+        "id": "scene1",
+        "text": "Your app is slow. Users are leaving. Why? Every database query hits the disk. That's 200 milliseconds per read. But with Redis? Under 1 millisecond. It stores everything in RAM.",
+        "duration": "8s"
+    },
+    {
+        "id": "scene2",
+        "text": "Forget SQL. Redis is dead simple. Set a key. Get a key. That's it. No joins. No schemas. Just raw speed.",
+        "duration": "8s"
+    },
+    {
+        "id": "scene3",
+        "text": "But Redis isn't just strings. It has Lists for queues. Sets for unique items. And Hashes—basically Python dictionaries. Real data structures, at the speed of RAM.",
+        "duration": "8s"
+    },
+    {
+        "id": "scene4",
+        "text": "The killer feature? Time To Live. Store data for 5 seconds, then it self-destructs. No cron jobs. No cleanup scripts. This is how Netflix handles millions of sessions.",
+        "duration": "10s"
+    },
+    {
+        "id": "scene5",
+        "text": "Need real-time? Redis has Pub/Sub built in. One message goes out, and every subscriber gets it instantly. No polling. Just push.",
+        "duration": "8s"
+    },
+    {
+        "id": "scene6",
+        "text": "Stop waiting on disk. Start building faster. This is Redis with Python. Subscribe for more!",
+        "duration": "8s"
+    }
+]
