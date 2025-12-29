@@ -1,85 +1,74 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code } from 'lucide-react';
+import { Gauge, Clock, Globe } from 'lucide-react';
 
-// Scene 2: THE QUESTION - Light Theme
+// Scene 2: THE CHALLENGE - Refined Visual
 const Scene2 = ({ speed = 1 }) => {
+    const challenges = [
+        { icon: Gauge, label: "Read-Heavy", desc: "100x more reads than writes", color: "primary" },
+        { icon: Clock, label: "< 200ms", desc: "Timeline must be instant", color: "accent" },
+        { icon: Globe, label: "Global Scale", desc: "Users everywhere, 24/7", color: "secondary" },
+    ];
+
     return (
-        <div className="w-full h-full flex flex-col items-center justify-center gap-10 p-12">
+        <div className="w-full h-full flex flex-col items-center justify-center gap-8 p-12">
+
+            {/* Subtle background glow */}
+            <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute top-1/4 right-1/4 w-[400px] h-[400px] bg-secondary/10 rounded-full blur-[100px]" />
+                <div className="absolute bottom-1/4 left-1/4 w-[300px] h-[300px] bg-accent/10 rounded-full blur-[100px]" />
+            </div>
 
             {/* Header */}
-            <motion.div
-                className="flex items-center gap-4"
+            <motion.h2
+                className="text-5xl font-bold text-text-dark text-center z-10"
                 initial={{ y: -30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
             >
-                <Code size={64} className="text-primary" strokeWidth={2.5} />
-                <h2 className="text-5xl font-bold text-text-dark">What does this print?</h2>
-            </motion.div>
+                The <span className="text-secondary glow-secondary">Challenge</span>
+            </motion.h2>
 
-            {/* Code Block */}
+            {/* Challenge Cards */}
             <motion.div
-                className="code-block w-full max-w-2xl text-5xl"
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.3 / speed, type: "spring" }}
-            >
-                {/* Line Numbers */}
-                <div className="flex">
-                    <div className="text-gray-500 pr-8 select-none">
-                        1<br />2<br />3
-                    </div>
-                    <div>
-                        <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.5 / speed }}
-                        >
-                            <span className="text-purple-400">x</span>
-                            <span className="text-white"> = </span>
-                            <span className="text-yellow-300">[[]]</span>
-                            <span className="text-white"> * </span>
-                            <span className="text-orange-400">3</span>
-                        </motion.div>
-
-                        <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.8 / speed }}
-                        >
-                            <span className="text-purple-400">x</span>
-                            <span className="text-white">[</span>
-                            <span className="text-orange-400">0</span>
-                            <span className="text-white">].</span>
-                            <span className="text-blue-400">append</span>
-                            <span className="text-white">(</span>
-                            <span className="text-orange-400">1</span>
-                            <span className="text-white">)</span>
-                        </motion.div>
-
-                        <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 1.1 / speed }}
-                        >
-                            <span className="text-green-400">print</span>
-                            <span className="text-white">(</span>
-                            <span className="text-purple-400">x</span>
-                            <span className="text-white">)</span>
-                        </motion.div>
-                    </div>
-                </div>
-            </motion.div>
-
-            {/* Question Prompt */}
-            <motion.div
-                className="text-6xl font-black text-accent glow-accent"
+                className="flex flex-col gap-5 w-full max-w-lg z-10"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 1.5 / speed }}
+                transition={{ delay: 0.3 / speed }}
             >
-                ???
+                {challenges.map((item, i) => (
+                    <motion.div
+                        key={i}
+                        className="stat-card flex items-center gap-5"
+                        initial={{ x: -40, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ delay: (0.4 + i * 0.25) / speed }}
+                    >
+                        <div className={`icon-wrapper ${item.color === 'primary' ? 'bg-primary/10' : item.color === 'accent' ? 'bg-accent/10' : 'bg-secondary/10'}`}>
+                            <item.icon
+                                size={40}
+                                className={item.color === 'primary' ? 'text-primary' : item.color === 'accent' ? 'text-accent' : 'text-secondary'}
+                                strokeWidth={1.8}
+                            />
+                        </div>
+                        <div>
+                            <p className={`text-2xl font-bold ${item.color === 'primary' ? 'text-primary' : item.color === 'accent' ? 'text-accent' : 'text-secondary'}`}>
+                                {item.label}
+                            </p>
+                            <p className="text-lg text-text-muted">{item.desc}</p>
+                        </div>
+                    </motion.div>
+                ))}
             </motion.div>
+
+            {/* Question */}
+            <motion.p
+                className="text-3xl font-semibold text-text-muted text-center mt-4 z-10"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.3 / speed }}
+            >
+                How do they solve this? 🤔
+            </motion.p>
         </div>
     );
 };

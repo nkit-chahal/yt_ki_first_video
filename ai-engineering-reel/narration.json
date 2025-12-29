@@ -1,0 +1,196 @@
+{
+    "video_title": "AI Engineering by Chip Huyen - Full Summary",
+    "chapters": [
+        {
+            "id": "c1_intro",
+            "title": "Introduction",
+            "timestamp": "00:00",
+            "narration": [
+                "Hey everyone, today we’re diving into the book 'AI Engineering' by Chip Huyen.",
+                "800 pages of really great content about this in-demand field that’s offering salaries of $300,000 or more.",
+                "In this video, I’m summarizing everything from the book to help you get a high-level overview of the field.",
+                "We’ll talk about foundation models, prompt engineering, RAG, fine-tuning, agents, how to build a system, improving inference, and more.",
+                "I also want to mention, this is a super high-level overview of a very detailed technical book.",
+                "Don’t expect to learn all the details just from watching this video.",
+                "I really recommend using this as a way to get an overview of what the field looks like and use it as a jumping-off point for your own research and exploration."
+            ]
+        },
+        {
+            "id": "c2_what_is",
+            "title": "What is AI Engineering?",
+            "timestamp": "00:36",
+            "narration": [
+                "So what exactly is AI Engineering, and how is it different from traditional machine learning? Let’s break it down.",
+                "AI Engineering has exploded recently for two simple reasons:",
+                "AI models have gotten dramatically better at solving real problems, while the barrier to building with them has gotten much lower.",
+                "This perfect storm has created one of the fastest-growing engineering disciplines today.",
+                "At its core, AI Engineering is about building applications on top of foundation models—those massive AI systems trained by companies like OpenAI or Google.",
+                "Unlike traditional machine learning engineers who build models from scratch, AI engineers leverage existing ones, focusing less on training and more on adaptation."
+            ]
+        },
+        {
+            "id": "c3_foundation_models",
+            "title": "Foundation Models",
+            "timestamp": "01:11",
+            "narration": [
+                "These foundation models work through a process called self-supervision.",
+                "Instead of requiring humans to painstakingly label data, these models can learn by predicting parts of their input data.",
+                "This breakthrough solved the data labeling bottleneck that held back AI for years.",
+                "As these models scaled up with more data and computing power, they evolved from simple language models to what we now call Large Language Models, or LLMs.",
+                "And they didn’t stop there; they’ve expanded to handle multiple types of data, including images and video, often becoming large multimodal models.",
+                "Nowadays, we’re seeing foundation models power everything from coding assistants like GitHub Copilot to image generation tools, writing aids, customer support bots, and sophisticated data analysis systems."
+            ]
+        },
+        {
+            "id": "c4_training_data",
+            "title": "Training Data",
+            "timestamp": "01:50",
+            "narration": [
+                "Now that we’ve covered what AI Engineering is, let’s dig deeper into foundation models themselves: how they’re trained, how they work, and why understanding their architecture matters for AI engineers.",
+                "Foundation models, at their core, can only know what they’ve been trained on. This might seem obvious, but it has profound implications.",
+                "If a model hasn’t seen examples of a specific language or concept during training, it simply won’t have that knowledge.",
+                "Most large foundation models are trained on web-crawled data, which brings some inherent problems.",
+                "This data often contains clickbait, misinformation, toxic content, and fake news.",
+                "To combat this, teams use various filtering techniques. For instance, OpenAI only used Reddit links with at least three upvotes when training GPT-2.",
+                "The language distribution in training data is also heavily skewed. About half of all crawled data is in English, which means languages with millions of speakers are often underrepresented.",
+                "This is why specialized models for specific languages and domains are becoming increasingly important."
+            ]
+        },
+        {
+            "id": "c5_transformers",
+            "title": "Transformers Architecture",
+            "timestamp": "02:46",
+            "narration": [
+                "In terms of model architecture, most foundation models use transformer architectures based on the attention mechanism.",
+                "But to understand why transformers were such a breakthrough, we need to look at what came before.",
+                "Transformers were invented to solve the problems of sequence-to-sequence models, which used recurrent neural networks (RNNs) for tasks like translation.",
+                "These had two main components: an encoder that processes inputs and a decoder that generates outputs. Both worked sequentially, token by token.",
+                "The problem is that the decoder only has access to a compressed representation of the entire input. Imagine trying to answer detailed questions about a book when all you have is a brief summary.",
+                "Also, input processing and output generation are done sequentially, so it’s slow for long sequences.",
+                "Transformers solved this with the attention mechanism, which allows the model to weigh the importance of different input tokens when generating each output token.",
+                "It’s like being able to reference any page in the book while answering questions. Plus, transformers can process input tokens in parallel, making them much faster.",
+                "During inference, transformers work in two steps: Prefill (processing all input tokens parallel) and Decode (generating one output token at a time).",
+                "The attention mechanism uses three types of vectors: Query vectors (Q), Key vectors (K), and Value vectors (V).",
+                "The model computes how much attention to give each input token by comparing the Q and K vectors. A high similarity score means that the token’s content (V) will heavily influence the output.",
+                "This is why longer context windows are computationally expensive: more tokens mean more K and V vectors to compute and store.",
+                "Attention is almost always multi-headed, allowing the model to focus on different groups of tokens simultaneously. In Llama-2-70B, there are 32 attention heads, for example.",
+                "A complete transformer consists of multiple transformer blocks, each containing an attention module and a neural network module."
+            ]
+        },
+        {
+            "id": "c6_eval",
+            "title": "Evaluation",
+            "timestamp": "08:37",
+            "narration": [
+                "Now that we understand foundation models a little more, let’s talk about one of the most crucial yet underappreciated aspects of AI engineering: evaluation.",
+                "For some applications, figuring out evaluation can consume the majority of your development effort.",
+                "It’s how you mitigate risks, uncover opportunities, and gain visibility into where your system is failing.",
+                "Evaluating AI systems is significantly harder than traditional ML models because problems are complex and responses are open-ended.",
+                "Foundation models are black boxes. You can only evaluate them by observing their outputs, not by understanding their internal workings.",
+                "Publicly available evaluation benchmarks quickly become saturated—meaning the model achieves perfect scores—as models improve.",
+                "So let’s start with some fundamental metrics used to evaluate language models during training: cross-entropy and perplexity.",
+                "These metrics essentially measure how well the model predicts the next token in a sequence.",
+                "Language models learn the distribution of their training data. The better a model learns this distribution, the better it becomes at predicting what comes next, resulting in lower cross-entropy.",
+                "Perplexity is simply the exponential of cross-entropy. It measures the amount of uncertainty a model has when predicting the next token.",
+                "While perplexity is useful for guiding training, it becomes less reliable for models that have undergone significant post-training with SFT or RLHF.",
+                "For some tasks, we can perform exact evaluation where there’s no ambiguity about the correct answer, like multiple-choice questions.",
+                "In coding tasks, functional correctness translates to execution accuracy: does the code run and produce the expected output?",
+                "One of the most powerful and common methods for evaluating AI models in production is using another AI model as a judge.",
+                "These AI Judges are fast, easy to use, and relatively cheap compared to human evaluators. They can work without reference data and can judge attributes like correctness, toxicity, and hallucinations."
+            ]
+        },
+        {
+            "id": "c7_selection",
+            "title": "Model Selection",
+            "timestamp": "14:50",
+            "narration": [
+                "Now that we understand evaluation, let’s tackle one of the most crucial decisions in AI engineering: Model Selection.",
+                "With the increasing number of readily available foundation models, the challenge isn’t developing models but selecting the right one for your application.",
+                "The selection process typically involves two key steps: Finding the best achievable performance on the task, and mapping models along a cost-performance axis.",
+                "Your criteria for evaluating a model can be organized into four buckets: Domain-specific capabilities, General capabilities, Instruction-following capabilities, and Cost/latency.",
+                "When evaluating models, you also need to differentiate between hard attributes (impossible to change) and soft attributes (can be improved through adaptation).",
+                "A high-level workflow for model selection looks like this: Filter out models whose hard attributes don’t work for you. Use publicly available information to narrow down options. Run your own experiments. Then continually monitor in production.",
+                "Most companies won’t build foundation models from scratch, so another question is whether to use commercial model APIs or host an open-source model yourself.",
+                "For a model to be accessible to users, a machine needs to host and run it. The service that hosts the model and handles queries is often called the inference service.",
+                "Whether to host a model yourself or use a model API depends on several factors: Data Privacy, Data Lineage, Performance, and Control."
+            ]
+        },
+        {
+            "id": "c8_prompt_eng",
+            "title": "Prompt Engineering",
+            "timestamp": "23:14",
+            "narration": [
+                "Now let’s dive into what might be the most accessible, yet surprisingly nuanced aspect of AI engineering: Prompt Engineering.",
+                "Prompt engineering refers to the process of crafting instructions that guide a model to generate your desired outcome.",
+                "It’s the easiest and most common model adaptation technique because, unlike fine-tuning, it doesn’t change the model’s weights—you’re just telling the model what you want it to do.",
+                "While it’s the most accessible entry point to AI Engineering, don’t be fooled into thinking that it’s simplistic. Effective prompt engineering requires the same experimental rigor as any machine learning task.",
+                "Prompts typically consist of one or more of these components: Task Description, Examples, and The Concrete Task.",
+                "How much prompt engineering you need depends on the model’s robustness to prompt perturbation.",
+                "It’s also worth noting that different models have different preferred prompt structures.",
+                "Teaching models what to do via prompts is known as In-Context Learning. Each example in your prompt is called a 'shot,' so we get terms like 'few-shot,' 'zero-shot,' and 'one-shot' learning.",
+                "Many modern models distinguish between system prompts (task description/role) and user prompts (specific query).",
+                "Key strategies for effective prompt engineering include: Write clear and explicit instructions. Ask the model to adopt a persona. Provide examples. Specify the output format. Break complex tasks into simpler subtasks. And give the model time to 'think' using Chain-of-Thought promoting.",
+                "Iterate systematically. This is so important. Different techniques work better for different models, so experimentation is crucial."
+            ]
+        },
+        {
+            "id": "c9_rag",
+            "title": "RAG (Retrieval Augmented Generation)",
+            "timestamp": "30:20",
+            "narration": [
+                "Now that we’ve covered prompt engineering, let’s explore how to give foundation models access to information beyond what they were trained on.",
+                "Two dominant patterns have emerged for providing models with the information they need: Retrieval Augmented Generation (RAG) and the Agentic Pattern.",
+                "RAG allows models to retrieve relevant information from external data sources, while the Agentic Pattern enables models to use tools like web search and APIs to gather information actively.",
+                "Retrieval Augmented Generation enhances a model’s generation capabilities by retrieving relevant information from external memory sources.",
+                "A RAG system consists of two main components: A Retriever (fetches information) and A Generator (produces a response).",
+                "The success of a RAG system heavily depends on its retriever. A retriever performs two main functions: indexing and querying.",
+                "How you index your data determines how you retrieve it later. Typically, you split documents into smaller chunks.",
+                "Retrieval algorithms include Term-Based Retrieval (keywords) and Embedding-Based Retrieval (semantic similarity using vector databases).",
+                "A production retrieval system typically combines several approaches.",
+                "Tactics to improve retrieval include Chunking, Re-ranking, Query Rewriting, and Contextual Retrieval.",
+                "It’s also important to note that RAG isn’t limited to text. It can also be used with multimodal and tabular data."
+            ]
+        },
+        {
+            "id": "c10_agents",
+            "title": "Agents",
+            "timestamp": "36:56",
+            "narration": [
+                "The Agentic Pattern is a more active approach to extending AI capabilities.",
+                "At its broadest definition, an Agent is anything that can: Observe its environment, Make decisions based on those observations, Take actions that affect the environment, and Learn from the outcomes.",
+                "What makes agents powerful is the set of tools they have access to. ChatGPT, for example, is an agent that can search the web, execute Python code, and generate images.",
+                "Complex tasks require Planning. There are many possible ways to decompose a task, and not all will be successful or efficient.",
+                "Agents can fail in various ways, so robust evaluation is important. Failures can include Planning Failures and Tool Failures.",
+                "One key challenge for agents is Memory. A memory system allows a model to retain and utilize information across interactions.",
+                "By combining RAG for information access, tools for capability extension, planning for complex tasks, and memory systems for continuity, agents can tackle increasingly sophisticated problems."
+            ]
+        },
+        {
+            "id": "c11_inference",
+            "title": "Inference Optimization",
+            "timestamp": "unknown",
+            "narration": [
+                "Now let's dive into one of the most practical aspects of AI engineering: Inference Optimization.",
+                "A model's real-world usefulness boils down to two factors: cost and speed.",
+                "To optimize inference, we need to understand bottlenecks. AI workloads generally face two types: Compute-bound (limiting factor is power) or Memory bandwidth-bound (limiting factor is data movement).",
+                "Inference APIs typically come in two types: Online APIs (optimize for latency) and Batch APIs (optimize for cost).",
+                "Key inference performance metrics include Latency (Time to First Token, Time Per Output Token) and Throughput.",
+                "Model Compression reduces size to improve speed through Quantization, Pruning, and Distillation.",
+                "To overcome the sequential bottleneck of autoregressive models, we can use Speculative Decoding, Inference with Reference, or Parallel Decoding.",
+                "Finally, Service-Level Optimization like Batching (Static, Dynamic, Continuous) and Caching can significantly improve performance.",
+                "The optimal strategy depends on your needs. For low latency, Replica Parallelism is often best. For most use cases, Quantization yields the biggest gains."
+            ]
+        },
+        {
+            "id": "c12_conclusion",
+            "title": "Conclusion",
+            "timestamp": "42:31",
+            "narration": [
+                "And that wraps up our journey through AI Engineering! We've covered foundation models, evaluation, prompt engineering, RAG, agents, fine-tuning, dataset engineering, and optimization.",
+                "This was a super high-level overview of a detailed book. I highly recommend checking out 'AI Engineering' by Chip Huyen for the full depth.",
+                "I had a great time putting this together. Let me know in the comments which book you want me to summarize next.",
+                "Don't forget to subscribe! Thanks for watching, and see you next time."
+            ]
+        }
+    ]
+}

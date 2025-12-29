@@ -4,17 +4,30 @@ import Scene2 from './scenes/Scene2';
 import Scene3 from './scenes/Scene3';
 import Scene4 from './scenes/Scene4';
 import Scene5 from './scenes/Scene5';
+import Scene6 from './scenes/Scene6';
+import Scene7 from './scenes/Scene7';
+import Scene8 from './scenes/Scene8';
+import Scene9 from './scenes/Scene9';
 import DebugPanel from './components/DebugPanel';
 
-const SCENES = [Scene1, Scene2, Scene3, Scene4, Scene5];
+const SCENES = [Scene1, Scene2, Scene3, Scene4, Scene5, Scene6, Scene7, Scene8, Scene9];
 
-// Audio files for each scene (scene5 uses scene4 audio or can be silent)
+// Audio files for each scene
 const AUDIO_FILES = [
-    '/audio/scene1.mp3',  // "Wait. Before I show the answer..."
-    '/audio/scene2.mp3',  // "What does this Python code print?"
-    '/audio/scene3.mp3',  // "3... 2... 1... Time's up!"
-    '/audio/scene4.mp3',  // "The answer is..." + "Were you right? Drop your answer..."
-    '/audio/scene5.mp3',  // CTA scene audio
+    '/audio/scene1.mp3',
+    '/audio/scene2.mp3',
+    '/audio/scene3.mp3',
+    '/audio/scene4.mp3',
+    '/audio/scene5.mp3',
+    '/audio/scene6.mp3',
+    '/audio/scene7.mp3',
+    '/audio/scene8.mp3',
+    '/audio/scene9.mp3',
+];
+
+// Fallback durations - INCREASED to prevent early cutoff (15s safe default)
+const SCENE_DURATIONS = [
+    15000, 15000, 15000, 15000, 15000, 15000, 15000, 15000, 15000
 ];
 
 // Load saved speeds from localStorage
@@ -29,7 +42,9 @@ function App() {
     const [animSpeed, setAnimSpeed] = useState(() => getSavedSpeed('riddle_anim_speed', 1.0));
     const [audioSpeed, setAudioSpeed] = useState(() => getSavedSpeed('riddle_audio_speed', 1.0));
     const [debugMode, setDebugMode] = useState(true);
+    const [audioAvailable, setAudioAvailable] = useState(true);
     const audioRef = useRef(null);
+    const fallbackTimerRef = useRef(null);
 
     // Save speeds to localStorage
     const handleAnimSpeedChange = (speed) => {
@@ -45,9 +60,7 @@ function App() {
     // Toggle debug mode with 'D' key
     useEffect(() => {
         const handleKey = (e) => {
-            // Ignore if typing in an input
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-
             if (e.key === 'd' || e.key === 'D') {
                 e.preventDefault();
                 setDebugMode(prev => !prev);
@@ -57,25 +70,61 @@ function App() {
         return () => document.removeEventListener('keydown', handleKey);
     }, []);
 
+    // Advance to next scene
+    const advanceScene = () => {
+        console.log('Advancing scene from:', currentScene);
+        if (currentScene < SCENES.length - 1) {
+            setCurrentScene(s => s + 1);
+        }
+    };
+
+    // Clear fallback timer
+    const clearFallbackTimer = () => {
+        if (fallbackTimerRef.current) {
+            clearTimeout(fallbackTimerRef.current);
+            fallbackTimerRef.current = null;
+        }
+    };
+
+    // Start fallback timer for auto-advance
+    const startFallbackTimer = () => {
+        clearFallbackTimer();
+        if (isPlaying && currentScene < SCENES.length - 1) {
+            console.warn('Starting fallback timer for scene:', currentScene);
+            const duration = SCENE_DURATIONS[currentScene] / audioSpeed;
+            fallbackTimerRef.current = setTimeout(advanceScene, duration);
+        }
+    };
+
     // Play audio when scene changes
     useEffect(() => {
-        if (audioRef.current && isPlaying) {
-            audioRef.current.src = AUDIO_FILES[currentScene];
-            audioRef.current.playbackRate = audioSpeed;
-            audioRef.current.play().catch(() => { });
-        }
-    }, [currentScene, isPlaying]);
+        clearFallbackTimer();
 
-    // Auto-play on first mount
-    useEffect(() => {
-        if (audioRef.current) {
-            audioRef.current.src = AUDIO_FILES[0];
+        if (audioRef.current && isPlaying) {
+            // Add timestamp to bust cache
+            audioRef.current.src = `${AUDIO_FILES[currentScene]}?t=${Date.now()}`;
             audioRef.current.playbackRate = audioSpeed;
-            audioRef.current.play().catch(() => {
-                // Browser blocked autoplay - need user click
-            });
+
+            console.log('Attempting to play:', audioRef.current.src);
+
+            const playPromise = audioRef.current.play();
+            if (playPromise) {
+                playPromise
+                    .then(() => {
+                        console.log('Audio playing successfully');
+                        setAudioAvailable(true);
+                    })
+                    .catch((err) => {
+                        console.error('Audio play failed:', err);
+                        // Audio failed to play, use fallback timer
+                        setAudioAvailable(false);
+                        startFallbackTimer();
+                    });
+            }
         }
-    }, []);
+
+        return () => clearFallbackTimer();
+    }, [currentScene, isPlaying]);
 
     // Update playback rate when audioSpeed changes
     useEffect(() => {
@@ -84,49 +133,69 @@ function App() {
         }
     }, [audioSpeed]);
 
-    // Auto-advance to next scene when audio ends
+    // Auto-advance when audio ends
     useEffect(() => {
         const audio = audioRef.current;
         if (!audio) return;
 
         const handleEnded = () => {
-            if (currentScene < SCENES.length - 1) {
-                setCurrentScene(s => s + 1);
-            }
+            console.log('Audio ended event fired');
+            advanceScene();
+        };
+
+        const handleError = (e) => {
+            console.error('Audio error event:', e);
+            setAudioAvailable(false);
+            startFallbackTimer();
         };
 
         audio.addEventListener('ended', handleEnded);
-        return () => audio.removeEventListener('ended', handleEnded);
-    }, [currentScene]);
+        audio.addEventListener('error', handleError);
+
+        return () => {
+            audio.removeEventListener('ended', handleEnded);
+            audio.removeEventListener('error', handleError);
+        };
+    }, [currentScene, isPlaying, audioSpeed]);
 
     // Play/pause control
     useEffect(() => {
         if (audioRef.current) {
             if (isPlaying) {
-                audioRef.current.play().catch(() => { });
+                audioRef.current.play().catch(() => {
+                    startFallbackTimer();
+                });
             } else {
                 audioRef.current.pause();
+                clearFallbackTimer();
             }
         }
     }, [isPlaying]);
 
     // Handle reset
     const handleReset = () => {
+        clearFallbackTimer();
         setCurrentScene(0);
         setIsPlaying(true);
         if (audioRef.current) {
-            audioRef.current.src = AUDIO_FILES[0];
+            // Add timestamp to bust cache
+            audioRef.current.src = `${AUDIO_FILES[0]}?t=${Date.now()}`;
             audioRef.current.playbackRate = audioSpeed;
-            audioRef.current.play().catch(() => { });
+            audioRef.current.play().catch(() => {
+                startFallbackTimer();
+            });
         }
     };
 
-    // Handle first click to start audio (browser autoplay policy workaround)
+    // Handle first click to start audio
     const handleFirstClick = () => {
         if (audioRef.current && audioRef.current.paused) {
-            audioRef.current.src = AUDIO_FILES[currentScene];
+            // Add timestamp to bust cache
+            audioRef.current.src = `${AUDIO_FILES[currentScene]}?t=${Date.now()}`;
             audioRef.current.playbackRate = audioSpeed;
-            audioRef.current.play().catch(() => { });
+            audioRef.current.play().catch(() => {
+                startFallbackTimer();
+            });
         }
     };
 
@@ -146,18 +215,6 @@ function App() {
                         className="h-full bg-primary transition-all duration-300"
                         style={{ width: `${((currentScene + 1) / SCENES.length) * 100}%` }}
                     />
-                </div>
-
-                {/* Scene Indicator */}
-                <div className="absolute top-8 left-1/2 -translate-x-1/2 flex gap-2 z-30">
-                    {SCENES.map((_, i) => (
-                        <div
-                            key={i}
-                            className={`w-2 h-2 rounded-full transition-all ${i === currentScene ? 'bg-primary scale-150' :
-                                i < currentScene ? 'bg-gray-500' : 'bg-gray-400'
-                                }`}
-                        />
-                    ))}
                 </div>
 
                 {/* Debug Panel */}

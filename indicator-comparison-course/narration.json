@@ -1,0 +1,115 @@
+[
+    {
+        "chapter": 1,
+        "title": "Introduction to Technical Analysis",
+        "segments": [
+            {
+                "id": "1_1",
+                "text": "Welcome to this comprehensive guide on technical indicators.",
+                "duration": "4s"
+            },
+            {
+                "id": "1_2",
+                "text": "Technical indicators are mathematical calculations based on price and volume that help traders predict future price movements.",
+                "duration": "6s"
+            },
+            {
+                "id": "1_3",
+                "text": "We'll cover three main categories.",
+                "duration": "3s"
+            },
+            {
+                "id": "1_4",
+                "text": "Trend indicators, like SMA, EMA, and MACD.",
+                "duration": "4s"
+            },
+            {
+                "id": "1_5",
+                "text": "Momentum indicators, like RSI and Stochastic.",
+                "duration": "3s"
+            },
+            {
+                "id": "1_6",
+                "text": "And Volume indicators, like OBV, VWAP, and Volume Profile.",
+                "duration": "4s"
+            },
+            {
+                "id": "1_7",
+                "text": "Let's start with the most basic: the Simple Moving Average.",
+                "duration": "4s"
+            }
+        ]
+    },
+    {
+        "chapter": 2,
+        "title": "Simple Moving Average (SMA)",
+        "segments": [
+            {
+                "id": "2_1",
+                "text": "The Simple Moving Average calculates the average closing price over a specific period.",
+                "duration": "5s"
+            },
+            {
+                "id": "2_2",
+                "text": "The formula is simple. Add up all closing prices, then divide by the number of periods.",
+                "duration": "5s"
+            },
+            {
+                "id": "2_3",
+                "text": "Let's see it in action on a price chart.",
+                "duration": "3s"
+            },
+            {
+                "id": "2_4",
+                "text": "The yellow line is the 5-day SMA. It follows price closely.",
+                "duration": "4s"
+            },
+            {
+                "id": "2_5",
+                "text": "The orange line is the 20-day SMA. It's smoother and shows the larger trend.",
+                "duration": "5s"
+            },
+            {
+                "id": "2_6",
+                "text": "When the fast SMA crosses above the slow SMA, that's a buy signal.",
+                "duration": "5s"
+            },
+            {
+                "id": "2_7",
+                "text": "When it crosses below, that's a sell signal.",
+                "duration": "3s"
+            }
+        ]
+    },
+    {
+        "chapter": 3,
+        "title": "Exponential Moving Average (EMA)",
+        "segments": [
+            {
+                "id": "3_1",
+                "text": "The Exponential Moving Average gives more weight to recent prices.",
+                "duration": "4s"
+            },
+            {
+                "id": "3_2",
+                "text": "This makes it more responsive to new information than the SMA.",
+                "duration": "4s"
+            },
+            {
+                "id": "3_3",
+                "text": "Watch how the EMA reacts faster to price changes.",
+                "duration": "3s"
+            },
+            {
+                "id": "3_4",
+                "text": "Traders often use the 9 and 21 EMA for short-term trading.",
+                "duration": "4s"
+            },
+            {
+                "id": "3_5",
+                "text": "EMA crossovers work the same way. Fast crossing above slow is bullish.",
+                "duration": "4s"
+            }
+        ]
+    }
+]

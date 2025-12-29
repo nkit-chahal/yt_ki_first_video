@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indicator Comparison Thumbnail</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #111;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .thumbnail {
+            width: 1280px;
+            height: 720px;
+            background: linear-gradient(135deg, #1C1917 0%, #292524 50%, #1C1917 100%);
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Background glows */
+        .bg-glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.4;
+        }
+
+        .glow-green {
+            background: #10B981;
+            top: -150px;
+            left: -100px;
+        }
+
+        .glow-red {
+            background: #EF4444;
+            bottom: -150px;
+            right: -100px;
+        }
+
+        .glow-amber {
+            background: #F59E0B;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.2;
+        }
+
+        /* Content */
+        .content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            padding: 50px;
+        }
+
+        /* Left Side */
+        .left-side {
+            width: 55%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .playlist-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #F59E0B, #D97706);
+            color: #1C1917;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 20px;
+            width: fit-content;
+        }
+
+        .main-question {
+            font-size: 72px;
+            font-weight: 900;
+            color: #FDFBF7;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .highlight-green {
+            color: #10B981;
+        }
+
+        .highlight-red {
+            color: #EF4444;
+        }
+
+        .highlight-amber {
+            color: #F59E0B;
+        }
+
+        .subtitle {
+            font-size: 28px;
+            color: #A8A29E;
+            margin-bottom: 30px;
+        }
+
+        /* Condition badges */
+        .conditions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .condition {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 12px 20px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .condition.trending {
+            border-color: #10B981;
+            color: #10B981;
+        }
+
+        .condition.ranging {
+            border-color: #3B82F6;
+            color: #3B82F6;
+        }
+
+        .condition.breakout {
+            border-color: #F59E0B;
+            color: #F59E0B;
+        }
+
+        .condition.reversal {
+            border-color: #A855F7;
+            color: #A855F7;
+        }
+
+        /* Right Side - Matrix Preview */
+        .right-side {
+            width: 45%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .matrix-preview {
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .matrix-title {
+            text-align: center;
+            color: #F59E0B;
+            font-weight: 700;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: 100px repeat(4, 60px);
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .matrix-cell {
+            padding: 10px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .matrix-header {
+            color: #78716C;
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        .matrix-indicator {
+            color: #F59E0B;
+            font-weight: 700;
+            text-align: left;
+        }
+
+        .matrix-yes {
+            background: rgba(16, 185, 129, 0.2);
+            font-size: 20px;
+        }
+
+        .matrix-no {
+            background: rgba(239, 68, 68, 0.2);
+            font-size: 20px;
+        }
+
+        .matrix-warn {
+            background: rgba(251, 146, 60, 0.2);
+            font-size: 20px;
+        }
+
+        .matrix-neutral {
+            background: rgba(255, 255, 255, 0.05);
+            font-size: 20px;
+            color: #666;
+        }
+
+        /* VS Badge */
+        .vs-badge {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #F59E0B;
+            color: #1C1917;
+            font-size: 32px;
+            font-weight: 900;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 20;
+            box-shadow: 0 5px 30px rgba(245, 158, 11, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="thumbnail">
+        <!-- Background glows -->
+        <div class="bg-glow glow-green"></div>
+        <div class="bg-glow glow-red"></div>
+        <div class="bg-glow glow-amber"></div>
+
+        <!-- VS Badge -->
+        <div class="vs-badge">?</div>
+
+        <div class="content">
+            <!-- Left Side -->
+            <div class="left-side">
+                <div class="playlist-badge">ALGO TRADING #2</div>
+                <h1 class="main-question">
+                    Which<br>
+                    <span class="highlight-amber">Indicator</span><br>
+                    Should You Use?
+                </h1>
+                <p class="subtitle">Match indicators to market conditions</p>
+
+                <div class="conditions">
+                    <div class="condition trending">📈 Trending</div>
+                    <div class="condition ranging">↔️ Ranging</div>
+                    <div class="condition breakout">⚡ Breakout</div>
+                    <div class="condition reversal">🔄 Reversal</div>
+                </div>
+            </div>
+
+            <!-- Right Side - Matrix Preview -->
+            <div class="right-side">
+                <div class="matrix-preview">
+                    <div class="matrix-title">📋 CHEAT SHEET</div>
+                    <div class="matrix-grid">
+                        <!-- Header -->
+                        <div class="matrix-cell"></div>
+                        <div class="matrix-cell matrix-header">📈</div>
+                        <div class="matrix-cell matrix-header">↔️</div>
+                        <div class="matrix-cell matrix-header">⚡</div>
+                        <div class="matrix-cell matrix-header">🔄</div>
+
+                        <!-- SMA/EMA -->
+                        <div class="matrix-cell matrix-indicator">SMA/EMA</div>
+                        <div class="matrix-cell matrix-yes">✅</div>
+                        <div class="matrix-cell matrix-no">❌</div>
+                        <div class="matrix-cell matrix-warn">⚠️</div>
+                        <div class="matrix-cell matrix-neutral">➖</div>
+
+                        <!-- MACD -->
+                        <div class="matrix-cell matrix-indicator">MACD</div>
+                        <div class="matrix-cell matrix-yes">✅</div>
+                        <div class="matrix-cell matrix-neutral">➖</div>
+                        <div class="matrix-cell matrix-yes">✅</div>
+                        <div class="matrix-cell matrix-yes">✅</div>
+
+                        <!-- RSI -->
+                        <div class="matrix-cell matrix-indicator">RSI</div>
+                        <div class="matrix-cell matrix-warn">⚠️</div>
+                        <div class="matrix-cell matrix-yes">✅</div>
+                        <div class="matrix-cell matrix-warn">⚠️</div>
+                        <div class="matrix-cell matrix-yes">✅</div>
+
+                        <!-- Stochastic -->
+                        <div class="matrix-cell matrix-indicator">Stoch</div>
+                        <div class="matrix-cell matrix-no">❌</div>
+                        <div class="matrix-cell matrix-yes">✅</div>
+                        <div class="matrix-cell matrix-neutral">➖</div>
+                        <div class="matrix-cell matrix-warn">⚠️</div>
+
+                        <!-- Volume -->
+                        <div class="matrix-cell matrix-indicator">Volume</div>
+                        <div class="matrix-cell matrix-yes">✅</div>
+                        <div class="matrix-cell matrix-neutral">➖</div>
+                        <div class="matrix-cell matrix-yes">✅</div>
+                        <div class="matrix-cell matrix-yes">✅</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

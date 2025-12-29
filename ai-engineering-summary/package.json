@@ -1,0 +1,28 @@
+{
+  "name": "ai-engineering-summary",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "remotion": "remotion studio src/remotion/Root.jsx",
+    "render": "remotion render src/remotion/Root.jsx DeepSeekReel out/deepseek-reel.mp4"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.18",
+    "@vitejs/plugin-react": "^5.1.2",
+    "tailwindcss": "^4.1.18",
+    "typescript": "~5.9.3",
+    "vite": "^7.2.4"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.395",
+    "@remotion/player": "^4.0.395",
+    "framer-motion": "^12.23.26",
+    "lucide-react": "^0.562.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
+  }
+}

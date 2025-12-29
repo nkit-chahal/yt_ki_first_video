@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+/* 16:9 Video Container */
+.video-container {
+    width: 1920px;
+    height: 1080px;
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0a0a0f 100%);
+    position: relative;
+    overflow: hidden;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: white;
+}
+
+/* Glass Card Effect */
+.glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+}
+
+/* Tier Badge */
+.tier-badge {
+    width: 80px;
+    height: 80px;
+    border-width: 3px;
+    border-style: solid;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 2rem;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Gradient Text */
+.gradient-text {
+    background: linear-gradient(135deg, #3B82F6, #8B5CF6, #EC4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Glow Effects */
+.glow-blue {
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.3);
+}
+
+.glow-green {
+    box-shadow: 0 0 40px rgba(16, 185, 129, 0.3);
+}
+
+.glow-purple {
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.3);
+}
+
+.glow-pink {
+    box-shadow: 0 0 40px rgba(236, 72, 153, 0.3);
+}
+
+.glow-red {
+    box-shadow: 0 0 40px rgba(239, 68, 68, 0.3);
+}
+
+.glow-amber {
+    box-shadow: 0 0 40px rgba(245, 158, 11, 0.3);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    background: #000;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#root {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

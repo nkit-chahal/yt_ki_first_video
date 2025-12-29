@@ -1,0 +1,47 @@
+[
+    {
+        "scene": 1,
+        "text": "How does Netflix know exactly what you want to watch... before YOU do?",
+        "duration": "5s"
+    },
+    {
+        "scene": 2,
+        "text": "It starts with scale. 230 Million users. 18,000 titles. That's billions of possible combinations.",
+        "duration": "6s"
+    },
+    {
+        "scene": 3,
+        "text": "They track everything. Explicit signals like your thumbs up... and implicit ones, like what you rewound or binged.",
+        "duration": "6s"
+    },
+    {
+        "scene": 4,
+        "text": "It's a massive funnel. They take thousands of candidates, filter them down to hundreds, and rank them instantly.",
+        "duration": "6s"
+    },
+    {
+        "scene": 5,
+        "text": "Collaborative filtering finds users like you. If they watched Stranger Things, you probably will too.",
+        "duration": "6s"
+    },
+    {
+        "scene": 6,
+        "text": "Then comes Ranking. The algorithm scores every title based on the probability you'll actually hit play.",
+        "duration": "6s"
+    },
+    {
+        "scene": 7,
+        "text": "It gets crazy. Even the thumbnail is personalized! You might see an action shot, while I see a romantic close-up.",
+        "duration": "6s"
+    },
+    {
+        "scene": 8,
+        "text": "So remember: It's Data Collection, Filtering, Ranking, and Artwork Personalization. That's the secret sauce!",
+        "duration": "7s"
+    },
+    {
+        "scene": 9,
+        "text": "Want more System Design secrets? Hit follow! Uber and Instagram are up next.",
+        "duration": "4s"
+    }
+]

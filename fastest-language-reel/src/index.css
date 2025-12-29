@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+/* 
+ * OpenAI System Design Theme 
+ * Primary: #10a37f (OpenAI Green)
+ * Background: #000000 (Black)
+ * Text: #FFFFFF (White)
+ */
+
+@theme {
+    --color-primary: #10a37f;
+    /* OpenAI Green */
+    --color-secondary: #FFFFFF;
+    /* White */
+    --color-accent: #19c37d;
+    /* Brighter Green */
+    --color-bg-main: #000000;
+    /* Pure Black */
+    --color-text-dark: #FFFFFF;
+    /* White */
+    --color-text-muted: #8e8ea0;
+    /* OpenAI Gray */
+}
+
+html,
+body,
+#root {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #000;
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+/* 9:16 Shorts Container - Matrix/Code Vibe */
+.shorts-container {
+    width: 1080px;
+    height: 1920px;
+    max-width: 100vw;
+    max-height: 100vh;
+    margin: 0 auto;
+    /* Subtle digital grid or green glow */
+    background: radial-gradient(circle at center, #0a1f16 0%, #000000 70%);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 50px rgba(16, 163, 127, 0.1);
+}
+
+@media (max-height: 1920px) {
+    .shorts-container {
+        transform-origin: top center;
+        transform: scale(calc(100vh / 1920));
+    }
+}
+
+/* Card Styling - Technical/Code Block feel */
+.stat-card {
+    background: rgba(32, 33, 35, 0.9);
+    /* OpenAI ChatGPT Dark Mode BG */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+/* Architecture Boxes - "Server" look */
+.arch-box {
+    background: #202123;
+    border: 1px solid #10a37f;
+    /* Green Border */
+    border-radius: 6px;
+    padding: 1.5rem;
+    color: white;
+    font-family: monospace;
+    font-weight: 600;
+    box-shadow: 0 0 15px rgba(16, 163, 127, 0.2);
+}
+
+.arch-box-secondary {
+    background: #202123;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    padding: 1.5rem;
+    color: white;
+    font-family: monospace;
+}
+
+/* Glows */
+.glow-primary {
+    text-shadow: 0 0 30px rgba(16, 163, 127, 0.6);
+}
+
+.glow-secondary {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+/* Icon Wrapper - Circuit/Token look */
+.icon-wrapper {
+    padding: 2rem;
+    border-radius: 12px;
+    /* Smoother square */
+    background: rgba(16, 163, 127, 0.1);
+    border: 1px solid rgba(16, 163, 127, 0.3);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 3px;
+}

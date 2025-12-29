@@ -1,0 +1,47 @@
+[
+    {
+        "scene": 1,
+        "text": "Ever notice your stop loss gets hit... then price reverses immediately?",
+        "duration": "5s"
+    },
+    {
+        "scene": 2,
+        "text": "That's not bad luck. That's stop hunting.",
+        "duration": "3s"
+    },
+    {
+        "scene": 3,
+        "text": "Big players can see where retail traders place their stops. Right below support. Right above resistance.",
+        "duration": "5s"
+    },
+    {
+        "scene": 4,
+        "text": "They push price just far enough to trigger those stops. Then reverse.",
+        "duration": "4s"
+    },
+    {
+        "scene": 5,
+        "text": "Your stop becomes their entry. Your loss becomes their profit.",
+        "duration": "4s"
+    },
+    {
+        "scene": 6,
+        "text": "So what do you do? First: use mental stops. Don't show your hand.",
+        "duration": "4s"
+    },
+    {
+        "scene": 7,
+        "text": "Second: widen your stops. Give the trade room to breathe.",
+        "duration": "4s"
+    },
+    {
+        "scene": 8,
+        "text": "Third: place stops at less obvious levels. Not where everyone else does.",
+        "duration": "4s"
+    },
+    {
+        "scene": 9,
+        "text": "Stop hunting is real. But now you know how to avoid it.",
+        "duration": "4s"
+    }
+]

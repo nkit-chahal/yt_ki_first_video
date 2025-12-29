@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+/* 
+ * Netflix Premium HDR Theme 
+ * A softer, high-fidelity dark mode that reduces eye strain while maintaining brand identity.
+ */
+
+@theme {
+    --color-primary: #E50914;
+    /* Netflix Red */
+    --color-secondary: #F5F5F1;
+    /* Off-White (Warm) */
+    --color-accent: #B81D24;
+    /* Deep Red */
+    --color-bg-main: #0a0a0a;
+    /* Rich Black */
+    --color-text-dark: #F5F5F1;
+    /* Off-White */
+    --color-text-muted: #9CA3AF;
+    /* Cool Gray */
+}
+
+html,
+body,
+#root {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #000;
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* 9:16 Shorts Container - Cinematic HDR Vignette */
+.shorts-container {
+    width: 1080px;
+    height: 1920px;
+    max-width: 100vw;
+    max-height: 100vh;
+    margin: 0 auto;
+    /* Deep, rich gradient: Distinctive "Spotlight" effect */
+    background: radial-gradient(circle at 50% 30%, #1f0808 0%, #0a0a0a 60%, #000000 100%);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 100px rgba(0, 0, 0, 1);
+}
+
+@media (max-height: 1920px) {
+    .shorts-container {
+        transform-origin: top center;
+        transform: scale(calc(100vh / 1920));
+    }
+}
+
+/* Card Styling - Premium Glass */
+.stat-card {
+    background: rgba(30, 30, 30, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    /* Highlight */
+    border-radius: 20px;
+    padding: 2.2rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(24px) saturate(120%);
+}
+
+/* Architecture Boxes - High Fidelity */
+.arch-box {
+    background: linear-gradient(145deg, rgba(35, 35, 35, 0.6) 0%, rgba(20, 20, 20, 0.6) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 3px solid #E50914;
+    /* Red accent line */
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    color: #F5F5F1;
+    font-weight: 600;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
+}
+
+.arch-box-secondary {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    color: #F5F5F1;
+    font-weight: 600;
+    backdrop-filter: blur(12px);
+}
+
+.arch-box-accent {
+    background: linear-gradient(135deg, rgba(229, 9, 20, 0.9) 0%, rgba(184, 29, 36, 0.9) 100%);
+    border: 1px solid rgba(255, 100, 100, 0.3);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    color: white;
+    font-weight: 700;
+    box-shadow: 0 0 40px rgba(229, 9, 20, 0.4);
+    /* HDR Bloom */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* HDR Glows - Multi-layer, softer */
+.glow-primary {
+    text-shadow:
+        0 0 20px rgba(229, 9, 20, 0.8),
+        0 0 50px rgba(229, 9, 20, 0.4);
+}
+
+.glow-secondary {
+    text-shadow:
+        0 0 20px rgba(255, 255, 255, 0.4),
+        0 0 40px rgba(255, 255, 255, 0.1);
+}
+
+/* Icon Wrapper - Crisp Glass */
+.icon-wrapper {
+    padding: 1.2rem;
+    border-radius: 50%;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Custom Scrollbar for lists */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 3px;
+}

@@ -1,0 +1,318 @@
+{
+    "video_title": "How ChatGPT Scales: The Engineering Behind 100M Users",
+    "total_duration": "10:00",
+    "scenes": [
+        {
+            "scene": "1-1",
+            "title": "The Luxury Car",
+            "narration": [
+                "Deep inside a data center, there is a piece of silicon that costs as much as a luxury car.",
+                "The H100. A beast capable of one thousand teraflops of mathematical violence."
+            ]
+        },
+        {
+            "scene": "1-2",
+            "title": "The Wait",
+            "narration": [
+                "But when you type a prompt into ChatGPT, this thirty-thousand-dollar beast isn't roaring.",
+                "It is waiting."
+            ]
+        },
+        {
+            "scene": "1-3",
+            "title": "Doing Nothing",
+            "narration": [
+                "It is arguably the most powerful calculator humanity has ever built.",
+                "And it spends most of its life doing... absolutely nothing."
+            ]
+        },
+        {
+            "scene": "1-4",
+            "title": "The Flaw",
+            "narration": [
+                "Why?",
+                "Because of a fatal flaw in modern computing architecture.",
+                "A flaw known as 'The Memory Wall'."
+            ]
+        },
+        {
+            "scene": "1-5",
+            "title": "Ferrari vs Sticker",
+            "narration": [
+                "The chip is a Ferrari engine, but we are feeding it fuel through a coffee stirrer."
+            ]
+        },
+        {
+            "scene": "1-6",
+            "title": "Physics",
+            "narration": [
+                "The math is instantaneous, but moving the data—the 'fuel'—from the memory to the core takes an eternity in computer time."
+            ]
+        },
+        {
+            "scene": "1-7",
+            "title": "The Problem",
+            "narration": [
+                "When OpenAI launched, they faced a terrifying math problem.",
+                "To serve 100 million users with a 175-billion parameter model, the Memory Wall shouldn't just make ChatGPT slow.",
+                "It should make it financially impossible."
+            ]
+        },
+        {
+            "scene": "1-8",
+            "title": "The Cheat",
+            "narration": [
+                "They needed a way to cheat the physics of hardware.",
+                "Here is how they did it."
+            ]
+        },
+        {
+            "scene": "2-1",
+            "title": "The Tragedy",
+            "narration": [
+                "The first problem was a tragedy of inefficiency."
+            ]
+        },
+        {
+            "scene": "2-2",
+            "title": "Reading the Book",
+            "narration": [
+                "Imagine reading a book, but for every new word you read, you are forced to re-read the entire book from the very first page up to your current point."
+            ]
+        },
+        {
+            "scene": "2-3",
+            "title": "Naive Transformer",
+            "narration": [
+                "That is how a naive Transformer model works. It is 'autoregressive.'",
+                "To predict word ten, it processes words one through nine. To predict word eleven, it processes one through ten again."
+            ]
+        },
+        {
+            "scene": "2-4",
+            "title": "Redundant Calculation",
+            "narration": [
+                "It is the most redundant calculation in the history of computer science.",
+                "As the conversation grows, the math creates an exponential explosion of wasted work."
+            ]
+        },
+        {
+            "scene": "2-5",
+            "title": "The Realization",
+            "narration": [
+                "The engineers looked at this and realized: We are calculating the same numbers over and over again."
+            ]
+        },
+        {
+            "scene": "2-6",
+            "title": "The Solution",
+            "narration": [
+                "The solution was KV Caching."
+            ]
+        },
+        {
+            "scene": "2-7",
+            "title": "Freezing",
+            "narration": [
+                "Instead of throwing away the calculations for the past words—the 'Keys' and 'Values'—we freeze them. We lock them in memory."
+            ]
+        },
+        {
+            "scene": "2-8",
+            "title": "Glancing",
+            "narration": [
+                "Now, when the model predicts the next word, it doesn't re-read the book. It just glances at its notes."
+            ]
+        },
+        {
+            "scene": "2-9",
+            "title": "Linear Breeze",
+            "narration": [
+                "We turned a quadratic disaster into a linear breeze."
+            ]
+        },
+        {
+            "scene": "2-10",
+            "title": "New Problem",
+            "narration": [
+                "But this created a new problem: We solved the compute bottleneck, but we filled the memory with cache."
+            ]
+        },
+        {
+            "scene": "3-1",
+            "title": "Traffic Jam",
+            "narration": [
+                "So the chip is faster, but now we have a traffic jam.",
+                "A server handles thousands of people at once."
+            ]
+        },
+        {
+            "scene": "3-2",
+            "title": "Static Batching",
+            "narration": [
+                "The old way to handle this was 'Static Batching.'",
+                "You group four people together, put them on a bus, and the bus doesn't move until everyone is done."
+            ]
+        },
+        {
+            "scene": "3-3",
+            "title": "The Disparity",
+            "narration": [
+                "But imagine User A asks 'What is 2+2?' and User B asks for a 'PhD thesis on Quantum Physics.'",
+                "User A finishes in 10 milliseconds. User B takes 30 seconds."
+            ]
+        },
+        {
+            "scene": "3-4",
+            "title": "Wasted Cycles",
+            "narration": [
+                "For 29.9 seconds, User A's seat on the bus—that distinct lane on the GPU—sits empty.",
+                "The beast is starving again. Wasted cycles. Wasted money."
+            ]
+        },
+        {
+            "scene": "3-5",
+            "title": "Orca",
+            "narration": [
+                "The fix came from a system called Orca.",
+                "They stopped thinking about requests as 'buses' and started thinking about them as 'Tetris.'"
+            ]
+        },
+        {
+            "scene": "3-6",
+            "title": "Continuous Batching",
+            "narration": [
+                "This is Continuous Batching."
+            ]
+        },
+        {
+            "scene": "3-7",
+            "title": "The Slot In",
+            "narration": [
+                "The moment User A finishes their tiny question, the system instantly ejects them and slots in a new user into that empty space.",
+                "No waiting. No polite queuing."
+            ]
+        },
+        {
+            "scene": "3-8",
+            "title": "The Result",
+            "narration": [
+                "Suddenly, the GPU goes from 30% utilization to 95%. Throughput triples. Same hardware, three times the users."
+            ]
+        },
+        {
+            "scene": "3-9",
+            "title": "Final Trick",
+            "narration": [
+                "But there was one final trick left. The most dangerous one."
+            ]
+        },
+        {
+            "scene": "4-1",
+            "title": "Still Limited",
+            "narration": [
+                "We optimized the memory. We optimized the scheduling. But we were still limited by the speed of the model itself."
+            ]
+        },
+        {
+            "scene": "4-2",
+            "title": "Heavy Model",
+            "narration": [
+                "GPT-4 is a genius, but it is heavy. It is slow."
+            ]
+        },
+        {
+            "scene": "4-3",
+            "title": "Counterintuitive",
+            "narration": [
+                "The engineers noticed something counterintuitive: It takes GPT-4 roughly the same amount of time to write one word as it does to proofread five words."
+            ]
+        },
+        {
+            "scene": "4-4",
+            "title": "Parallelism",
+            "narration": [
+                "Why? Because writing is sequential, but proofreading can happen in parallel."
+            ]
+        },
+        {
+            "scene": "4-5",
+            "title": "The Gamble",
+            "narration": [
+                "So, they decided to gamble. This is Speculative Decoding."
+            ]
+        },
+        {
+            "scene": "4-6",
+            "title": "The Intern",
+            "narration": [
+                "They employ a second model. A tiny, fast, 'dumb' model. Let's call him the Intern."
+            ]
+        },
+        {
+            "scene": "4-7",
+            "title": "The Sprint",
+            "narration": [
+                "When you ask a question, the Intern sprints ahead, wildly guessing the next five words.",
+                "He's often right, but sometimes wrong. It doesn't matter. He's fast."
+            ]
+        },
+        {
+            "scene": "4-8",
+            "title": "The Proofread",
+            "narration": [
+                "He hands his messy draft to GPT-4. GPT-4 looks at the five words all at once in a single glance."
+            ]
+        },
+        {
+            "scene": "4-9",
+            "title": "Approval",
+            "narration": [
+                "If the Intern was right, GPT-4 stamps them 'Approved.' We just got five tokens for the price of one.",
+                "If the Intern was wrong, GPT-4 discards them and takes over."
+            ]
+        },
+        {
+            "scene": "4-10",
+            "title": "Ghostwriter",
+            "narration": [
+                "It's like having a ghostwriter draft your emails, and you just hit 'send.'"
+            ]
+        },
+        {
+            "scene": "4-11",
+            "title": "Doubled Speed",
+            "narration": [
+                "This trick alone doubled the speed of ChatGPT overnight."
+            ]
+        },
+        {
+            "scene": "5-1",
+            "title": "Recap",
+            "narration": [
+                "KV Caching. Continuous Batching. Speculative Decoding."
+            ]
+        },
+        {
+            "scene": "5-2",
+            "title": "Architecture",
+            "narration": [
+                "These aren't just software updates. They are the intricate, invisible architecture that keeps the beast fed."
+            ]
+        },
+        {
+            "scene": "5-3",
+            "title": "Survival",
+            "narration": [
+                "Without these three innovations, the AI revolution would have died in a server room, crushed by the weight of its own memory."
+            ]
+        },
+        {
+            "scene": "5-4",
+            "title": "Shattering",
+            "narration": [
+                "System design isn't just about making things work. It's about finding the bottleneck... and shattering it."
+            ]
+        }
+    ]
+}

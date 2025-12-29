@@ -1,0 +1,47 @@
+[
+    {
+        "scene": 1,
+        "text": "If you're using RSI and MACD to trade... why are you still losing money?",
+        "duration": "5s"
+    },
+    {
+        "scene": 2,
+        "text": "Because indicators are lagging. They're built from past prices.",
+        "duration": "4s"
+    },
+    {
+        "scene": 3,
+        "text": "By the time RSI says 'oversold'... the move is already over.",
+        "duration": "4s"
+    },
+    {
+        "scene": 4,
+        "text": "And false signals? Everywhere. RSI hits 30, you buy, price keeps falling.",
+        "duration": "5s"
+    },
+    {
+        "scene": 5,
+        "text": "But here's the real problem: everyone watches the same levels.",
+        "duration": "4s"
+    },
+    {
+        "scene": 6,
+        "text": "When a million traders see RSI at 70 and sell... that creates the reversal.",
+        "duration": "5s"
+    },
+    {
+        "scene": 7,
+        "text": "So what works? Price action. Volume. Market structure.",
+        "duration": "4s"
+    },
+    {
+        "scene": 8,
+        "text": "The raw data... before it gets averaged and delayed.",
+        "duration": "4s"
+    },
+    {
+        "scene": 9,
+        "text": "Indicators aren't useless. They're just not enough.",
+        "duration": "3s"
+    }
+]

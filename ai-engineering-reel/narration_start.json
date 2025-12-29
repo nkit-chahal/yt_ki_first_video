@@ -1,0 +1,61 @@
+{
+    "video_title": "AI Engineering by Chip Huyen - Full Summary",
+    "chapters": [
+        {
+            "id": "intro",
+            "title": "Introduction",
+            "timestamp": "00:00",
+            "narration": [
+                "Hey everyone, today we’re diving into the book 'AI Engineering' by Chip Huyen.",
+                "800 pages of really great content about this in-demand field that’s offering salaries of $300,000 or more.",
+                "In this video, I’m summarizing everything from the book to help you get a high-level overview of the field.",
+                "We’ll talk about foundation models, prompt engineering, RAG, fine-tuning, agents, how to build a system, improving inference, and more.",
+                "I also want to mention, this is a super high-level overview of a very detailed technical book.",
+                "Don’t expect to learn all the details just from watching this video.",
+                "I really recommend using this as a way to get an overview of what the field looks like and use it as a jumping-off point for your own research and exploration."
+            ]
+        },
+        {
+            "id": "what_is_ai_eng",
+            "title": "What is AI Engineering?",
+            "timestamp": "00:36",
+            "narration": [
+                "So what exactly is AI Engineering, and how is it different from traditional machine learning?",
+                "Let’s break it down.",
+                "AI Engineering has exploded recently for two simple reasons:",
+                "AI models have gotten dramatically better at solving real problems, while the barrier to building with them has gotten much lower.",
+                "This perfect storm has created one of the fastest-growing engineering disciplines today.",
+                "At its core, AI Engineering is about building applications on top of foundation models—those massive AI systems trained by companies like OpenAI or Google.",
+                "Unlike traditional machine learning engineers who build models from scratch, AI engineers leverage existing ones, focusing less on training and more on adaptation."
+            ]
+        },
+        {
+            "id": "foundation_models",
+            "title": "Foundation Models",
+            "timestamp": "01:11",
+            "narration": [
+                "These foundation models work through a process called self-supervision.",
+                "Instead of requiring humans to painstakingly label data, these models can learn by predicting parts of their input data.",
+                "This breakthrough solved the data labeling bottleneck that held back AI for years.",
+                "As these models scaled up with more data and computing power, they evolved from simple language models to what we now call Large Language Models, or LLMs.",
+                "And they didn’t stop there; they’ve expanded to handle multiple types of data, including images and video, often becoming large multimodal models.",
+                "Nowadays, we’re seeing foundation models power everything from coding assistants like GitHub Copilot to image generation tools, writing aids, customer support bots, and sophisticated data analysis systems."
+            ]
+        },
+        {
+            "id": "training_data",
+            "title": "Training Data Challenges",
+            "timestamp": "01:50",
+            "narration": [
+                "Now that we’ve covered what AI Engineering is, let’s dig deeper into foundation models themselves: how they’re trained, how they work, and why understanding their architecture matters for AI engineers.",
+                "Foundation models, at their core, can only know what they’ve been trained on.",
+                "This might seem obvious, but it has profound implications.",
+                "If a model hasn’t seen examples of a specific language or concept during training, it simply won’t have that knowledge.",
+                "Most large foundation models are trained on web-crawled data, which brings some inherent problems.",
+                "This data often contains clickbait, misinformation, toxic content, and fake news.",
+                "To combat this, teams use various filtering techniques.",
+                "For instance, OpenAI only used Reddit links with at least three upvotes when training GPT-2."
+            ]
+        }
+    ]
+}

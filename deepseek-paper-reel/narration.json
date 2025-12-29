@@ -1,0 +1,92 @@
+{
+    "video_title": "2.5 Years in Class: How to Train AI Right",
+    "total_duration": "~90s",
+    "scenes": [
+        {
+            "scene": "0",
+            "title": "The Hook (Your Data is Garbage)",
+            "duration": "0:00-0:10",
+            "narration": [
+                "Stop training your AI on internet garbage.",
+                "Right now, most Vision-Language Models are fed billions of image-text pairs scraped from random webpages.",
+                "It's noisy, it's full of ads, and the images have zero logical connection.",
+                "It is essentially junk food for Artificial Intelligence."
+            ]
+        },
+        {
+            "scene": "1",
+            "title": "The Fix (2.5 Years in Class)",
+            "duration": "0:10-0:20",
+            "narration": [
+                "But a new paper just dropped the ultimate fix.",
+                "It's called '2.5 Years in Class,' and the concept is genius.",
+                "Instead of crawling the chaotic web, they literally sent the AI to school."
+            ]
+        },
+        {
+            "scene": "2",
+            "title": "The Dataset (22,000 Hours)",
+            "duration": "0:20-0:35",
+            "narration": [
+                "They curated a massive dataset from 22,000 hours of instructional videos.",
+                "We're talking Algebra, Physics, Engineering—real, foundational knowledge.",
+                "But here is the catch: they didn't just dump the raw video files.",
+                "That would be lazy. They built a 'Multimodal Textbook' pipeline."
+            ]
+        },
+        {
+            "scene": "3",
+            "title": "The Pipeline (Secret Sauce)",
+            "duration": "0:35-0:55",
+            "narration": [
+                "Here is the secret sauce:",
+                "They used LLMs to extract the teacher's voice.",
+                "Then, they used OCR to read the complex formulas written on the blackboard.",
+                "Finally, they interleaved the video keyframes with that text in perfect, chronological order.",
+                "They effectively turned video tutorials into a perfect, frame-by-frame textbook."
+            ]
+        },
+        {
+            "scene": "4",
+            "title": "Coherence (Logic Matters)",
+            "duration": "0:55-1:10",
+            "narration": [
+                "This creates something web data can't offer: Coherence.",
+                "In the paper, they proved that if you shuffle the images in a standard dataset, the model doesn't care.",
+                "But if you shuffle this textbook? The performance tanks.",
+                "That proves the model is actually learning the logic and reasoning between frames, not just memorizing pixels."
+            ]
+        },
+        {
+            "scene": "5",
+            "title": "Results (Reasoning Unlocked)",
+            "duration": "1:10-1:22",
+            "narration": [
+                "The results are undeniable.",
+                "Models pre-trained on this 'Textbook' absolutely destroyed the baselines on reasoning-heavy tasks like MathVista and ScienceQA.",
+                "High-quality, dense knowledge beats massive scale every single time."
+            ]
+        },
+        {
+            "scene": "6",
+            "title": "Cheat Test (100% Accuracy)",
+            "duration": "1:22-1:30",
+            "narration": [
+                "They even ran a 'Cheat Test' where they gave the answer in the context window.",
+                "Web-trained models ignored it.",
+                "This model? It actually paid attention and used the context to solve the problem."
+            ]
+        },
+        {
+            "scene": "7",
+            "title": "CTA (Subscribe)",
+            "duration": "1:30-End",
+            "narration": [
+                "This is the future of Open Source AI.",
+                "Less noise, more knowledge.",
+                "Hit that subscribe button and visit the channel for point-to-point reviews of the latest research papers.",
+                "I break down the papers no one else is reading."
+            ]
+        }
+    ]
+}

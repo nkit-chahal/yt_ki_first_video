@@ -1,0 +1,65 @@
+{
+    "video_title": "Which Coding Language is FASTEST?",
+    "total_duration": "~45s",
+    "scenes": [
+        {
+            "scene": "1",
+            "title": "The Question",
+            "narration": [
+                "Which coding language is the FASTEST?",
+                "Let's find out."
+            ]
+        },
+        {
+            "scene": "2",
+            "title": "The Contenders",
+            "narration": [
+                "In one corner: Python, the beginner's favorite.",
+                "JavaScript, the web king.",
+                "C++, the old veteran.",
+                "Go, the Google creation.",
+                "And Rust, the new challenger."
+            ]
+        },
+        {
+            "scene": "3",
+            "title": "The Race",
+            "narration": [
+                "We ran the same benchmark on all five.",
+                "Fibonacci of 40. Pure CPU torture.",
+                "Watch them race."
+            ]
+        },
+        {
+            "scene": "4",
+            "title": "Results",
+            "narration": [
+                "Rust wins at 0.8 seconds.",
+                "C++ is right behind at 0.9.",
+                "Go comes in third.",
+                "JavaScript... 3.5 seconds. Not bad.",
+                "And Python? 45 SECONDS.",
+                "That's 50 times slower than Rust."
+            ]
+        },
+        {
+            "scene": "5",
+            "title": "Plot Twist",
+            "narration": [
+                "But wait.",
+                "Speed isn't everything.",
+                "What about readability? Developer speed? Community support?",
+                "Python might be slow, but it's the most popular language in the world for a reason."
+            ]
+        },
+        {
+            "scene": "6",
+            "title": "CTA",
+            "narration": [
+                "So which one is YOUR favorite?",
+                "Comment below!",
+                "And be honest... are you a Python dev crying right now?"
+            ]
+        }
+    ]
+}

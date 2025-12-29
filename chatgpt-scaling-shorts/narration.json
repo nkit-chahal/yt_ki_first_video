@@ -1,0 +1,37 @@
+[
+    {
+        "scene": 1,
+        "text": "Why isn't ChatGPT slow... when a hundred million people use it at once?",
+        "duration": "5s"
+    },
+    {
+        "scene": 2,
+        "text": "Here's the thing. The GPU isn't stuck doing math. It's stuck waiting for data. That's the real bottleneck.",
+        "duration": "7s"
+    },
+    {
+        "scene": 3,
+        "text": "So we use something called KV Cache. Basically, we don't re-read the whole conversation every time. We just remember what we already computed.",
+        "duration": "8s"
+    },
+    {
+        "scene": 4,
+        "text": "Now, if everybody waits for the slowest request? That's a disaster. The GPU just sits there. Doing nothing.",
+        "duration": "7s"
+    },
+    {
+        "scene": 5,
+        "text": "So instead, we do Continuous Batching. The second one request finishes, a new one jumps in. No gaps. No wasted cycles.",
+        "duration": "7s"
+    },
+    {
+        "scene": 6,
+        "text": "Then there's this clever trick. A tiny model guesses the next few words. The big model just... checks if it's right. Three words for the price of one!",
+        "duration": "8s"
+    },
+    {
+        "scene": 7,
+        "text": "So that's it. Cache your context. Batch your requests. Speculate to speed up. Follow for more System Design!",
+        "duration": "6s"
+    }
+]

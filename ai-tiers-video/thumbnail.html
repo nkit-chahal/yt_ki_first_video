@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Bubble Thumbnail</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #1a1a2e;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .thumbnail {
+            width: 1280px;
+            height: 720px;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0f0f1a 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+        }
+
+        /* Animated background bubbles */
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .bubble-1 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(239, 68, 68, 0.4), transparent);
+            top: -50px;
+            right: 100px;
+            animation-delay: 0s;
+        }
+
+        .bubble-2 {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.4), transparent);
+            bottom: 50px;
+            left: 50px;
+            animation-delay: 2s;
+        }
+
+        .bubble-3 {
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent);
+            top: 200px;
+            left: 200px;
+            animation-delay: 4s;
+        }
+
+        /* Popping bubbles effect */
+        .pop {
+            position: absolute;
+            font-size: 80px;
+            opacity: 0.2;
+        }
+
+        .pop-1 {
+            top: 80px;
+            right: 200px;
+            transform: rotate(-15deg);
+        }
+
+        .pop-2 {
+            bottom: 150px;
+            right: 80px;
+            transform: rotate(10deg);
+            opacity: 0.15;
+        }
+
+        .pop-3 {
+            top: 250px;
+            right: 350px;
+            transform: rotate(5deg);
+            opacity: 0.1;
+            font-size: 50px;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+            }
+
+            50% {
+                transform: translateY(-20px) scale(1.05);
+            }
+        }
+
+        /* Left side - Text content */
+        .left-side {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px 50px 60px 80px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .warning-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(239, 68, 68, 0.2);
+            border: 2px solid #ef4444;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 22px;
+            font-weight: 700;
+            color: #ef4444;
+            margin-bottom: 30px;
+            width: fit-content;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .main-title {
+            font-size: 72px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 30px;
+        }
+
+        .title-line-1 {
+            color: white;
+        }
+
+        .title-bubble {
+            background: linear-gradient(135deg, #ef4444, #f97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .title-line-2 {
+            color: white;
+            font-size: 58px;
+        }
+
+        .profit-text {
+            background: linear-gradient(135deg, #10b981, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 28px;
+            color: #9ca3af;
+            margin-top: 20px;
+        }
+
+        .tier-badges {
+            display: flex;
+            gap: 15px;
+            margin-top: 35px;
+        }
+
+        .tier-badge {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 24px;
+            border: 3px solid;
+        }
+
+        .tier-0 {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: #10b981;
+            color: #10b981;
+        }
+
+        .tier-1 {
+            background: rgba(139, 92, 246, 0.2);
+            border-color: #a78bfa;
+            color: #a78bfa;
+        }
+
+        .tier-2 {
+            background: rgba(236, 72, 153, 0.2);
+            border-color: #f472b6;
+            color: #f472b6;
+        }
+
+        .tier-3 {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: #f87171;
+            color: #f87171;
+        }
+
+        .tier-4 {
+            background: rgba(245, 158, 11, 0.2);
+            border-color: #fbbf24;
+            color: #fbbf24;
+        }
+
+        .tier-5 {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: #60a5fa;
+            color: #60a5fa;
+        }
+
+        /* Right side - Visual */
+        .right-side {
+            flex: 0.8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .money-stack {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .dollar-sign {
+            font-size: 200px;
+            font-weight: 900;
+            background: linear-gradient(180deg, #10b981 0%, #059669 50%, #047857 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 30px rgba(16, 185, 129, 0.5));
+            position: relative;
+            z-index: 5;
+        }
+
+        .arrow-up {
+            position: absolute;
+            bottom: -30px;
+            right: -80px;
+            font-size: 120px;
+            color: #10b981;
+            animation: bounce 1s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* Falling stocks indicator */
+        .chart-down {
+            position: absolute;
+            top: 80px;
+            right: 50px;
+            width: 180px;
+            height: 120px;
+        }
+
+        .chart-line {
+            stroke: #ef4444;
+            stroke-width: 6;
+            fill: none;
+            stroke-linecap: round;
+            filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.5));
+        }
+
+        .chart-arrow {
+            fill: #ef4444;
+        }
+
+        /* Corner elements */
+        .corner-badge {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 28px;
+            font-weight: 900;
+            color: black;
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.4);
+        }
+
+        /* Cracking effect overlay */
+        .crack-overlay {
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 0 L55 30 L70 35 L55 50 L60 100' stroke='%23ef4444' stroke-width='0.5' fill='none' opacity='0.3'/%3E%3C/svg%3E") no-repeat center;
+            background-size: cover;
+            opacity: 0.2;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="thumbnail">
+        <!-- Background bubbles -->
+        <div class="bubble bubble-1"></div>
+        <div class="bubble bubble-2"></div>
+        <div class="bubble bubble-3"></div>
+
+        <!-- Popping bubbles -->
+        <div class="pop pop-1">💥</div>
+        <div class="pop pop-2">💥</div>
+        <div class="pop pop-3">💥</div>
+
+        <!-- Left side content -->
+        <div class="left-side">
+            <div class="warning-badge">
+                <span>⚠️</span>
+                <span>Warning</span>
+            </div>
+
+            <div class="main-title">
+                <div class="title-line-1">The AI <span class="title-bubble">Bubble</span></div>
+                <div class="title-line-1">is <span class="title-bubble">Bursting</span>...</div>
+                <div class="title-line-2">Here's How to <span class="profit-text">PROFIT</span></div>
+            </div>
+
+            <div class="tier-badges">
+                <div class="tier-badge tier-0">0</div>
+                <div class="tier-badge tier-1">1</div>
+                <div class="tier-badge tier-2">2</div>
+                <div class="tier-badge tier-3">3</div>
+                <div class="tier-badge tier-4">4</div>
+                <div class="tier-badge tier-5">5</div>
+            </div>
+
+            <div class="subtitle">The 6 Tiers of AI Economics 📊</div>
+        </div>
+
+        <!-- Right side visual -->
+        <div class="right-side">
+            <!-- Falling chart -->
+            <svg class="chart-down" viewBox="0 0 180 120">
+                <path class="chart-line" d="M10 20 Q40 25 60 40 T100 70 T150 110" />
+                <polygon class="chart-arrow" points="145,100 160,115 140,115" />
+            </svg>
+
+            <div class="money-stack">
+                <span class="dollar-sign">$</span>
+                <span class="arrow-up">📈</span>
+            </div>
+        </div>
+
+        <!-- Corner badge -->
+        <div class="corner-badge">🎯 5-MIN MBA</div>
+
+        <!-- Crack overlay -->
+        <div class="crack-overlay"></div>
+    </div>
+</body>
+
+</html>
