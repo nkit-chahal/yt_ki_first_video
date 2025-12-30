@@ -24,8 +24,8 @@ const SCENES = [
 
 function App() {
     const [currentScene, setCurrentScene] = useState(0);
-    const [playbackSpeed, setPlaybackSpeed] = useState(() => {
-        const saved = localStorage.getItem('playbackSpeed');
+    const [animSpeed, setAnimSpeed] = useState(() => {
+        const saved = localStorage.getItem('animSpeed');
         return saved ? parseFloat(saved) : 1;
     });
     const [showControls, setShowControls] = useState(true);
@@ -49,7 +49,7 @@ function App() {
         audio.volume = isMuted ? 0 : 1;
 
         if (isPlaying) {
-            audio.playbackRate = playbackSpeed;
+            // Audio always plays at 1x speed - animations are controlled separately
             audio.play().catch(err => console.error("Audio play failed:", err));
         }
 
@@ -78,14 +78,14 @@ function App() {
         if (!audioRef.current) return;
 
         if (isPlaying) {
-            audioRef.current.playbackRate = playbackSpeed;
+            // Audio always plays at 1x speed
             audioRef.current.play().catch(e => {
                 // Ignore error if src is empty
             });
         } else {
             audioRef.current.pause();
         }
-    }, [isPlaying, playbackSpeed]);
+    }, [isPlaying]);
 
     // Volume control
     useEffect(() => {
@@ -94,8 +94,8 @@ function App() {
 
     // Save speed preference
     useEffect(() => {
-        localStorage.setItem('playbackSpeed', playbackSpeed);
-    }, [playbackSpeed]);
+        localStorage.setItem('animSpeed', animSpeed);
+    }, [animSpeed]);
 
     // Keyboard navigation
     useEffect(() => {
@@ -180,14 +180,14 @@ function App() {
 
                 {/* Speed Control Slider */}
                 <div className="flex items-center gap-2 bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
-                    <span className="text-white text-xs font-bold w-8 text-right">{playbackSpeed}x</span>
+                    <span className="text-white text-xs font-bold w-8 text-right">{animSpeed}x</span>
                     <input
                         type="range"
                         min="0.1"
                         max="2"
                         step="0.1"
-                        value={playbackSpeed}
-                        onChange={(e) => setPlaybackSpeed(parseFloat(e.target.value))}
+                        value={animSpeed}
+                        onChange={(e) => setAnimSpeed(parseFloat(e.target.value))}
                         className="w-24 h-1 bg-white/20 rounded-lg appearance-none cursor-pointer accent-yellow-400"
                     />
                 </div>
@@ -216,7 +216,7 @@ function App() {
                     exit={{ opacity: 0, x: -50 }}
                     transition={{ duration: 0.3 }}
                 >
-                    <CurrentSceneComponent playbackSpeed={playbackSpeed} />
+                    <CurrentSceneComponent animSpeed={animSpeed} />
                 </motion.div>
             </AnimatePresence>
 

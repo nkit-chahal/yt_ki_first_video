@@ -1,0 +1,66 @@
+audio_file,transcription
+scene0.mp3,"Stop training your AI on internet garbage. Right now, most Vision-Language Models are fed billions of image-text pairs scraped from random webpages. It's noisy, it's full of ads, and the images have zero logical connection. It is essentially junk food for Artificial Intelligence."
+scene1.mp3,"But a new paper just dropped the ultimate fix. It's called '2.5 Years in Class,' and the concept is genius. Instead of crawling the chaotic web, they literally sent the AI to school."
+scene2.mp3,"They curated a massive dataset from 22,000 hours of instructional videos. We're talking Algebra, Physics, Engineering—real, foundational knowledge. But here is the catch: they didn't just dump the raw video files. That would be lazy. They built a 'Multimodal Textbook' pipeline."
+scene3.mp3,"Here is the secret sauce: They used LLMs to extract the teacher's voice. Then, they used OCR to read the complex formulas written on the blackboard. Finally, they interleaved the video keyframes with that text in perfect, chronological order. They effectively turned video tutorials into a perfect, frame-by-frame textbook."
+scene4.mp3,"This creates something web data can't offer: Coherence. In the paper, they proved that if you shuffle the images in a standard dataset, the model doesn't care. But if you shuffle this textbook? The performance tanks. That proves the model is actually learning the logic and reasoning between frames, not just memorizing pixels."
+scene5.mp3,"The results are undeniable. Models pre-trained on this 'Textbook' absolutely destroyed the baselines on reasoning-heavy tasks like MathVista and ScienceQA. High-quality, dense knowledge beats massive scale every single time."
+scene6.mp3,"They even ran a 'Cheat Test' where they gave the answer in the context window. Web-trained models ignored it. This model? It actually paid attention and used the context to solve the problem."
+scene7.mp3,"This is the future of Open Source AI. Less noise, more knowledge. Hit that subscribe button and visit the channel for point-to-point reviews of the latest research papers. I break down the papers no one else is reading."
+chatgpt-scaling-shorts_scene1.mp3,Why isn't ChatGPT slow... when a hundred million people use it at once?
+chatgpt-scaling-shorts_scene2.mp3,Here's the thing. The GPU isn't stuck doing math. It's stuck waiting for data. That's the real bottleneck.
+chatgpt-scaling-shorts_scene3.mp3,"So we use something called KV Cache. Basically, we don't re-read the whole conversation every time. We just remember what we already computed."
+chatgpt-scaling-shorts_scene4.mp3,"Now, if everybody waits for the slowest request? That's a disaster. The GPU just sits there. Doing nothing."
+chatgpt-scaling-shorts_scene5.mp3,"So instead, we do Continuous Batching. The second one request finishes, a new one jumps in. No gaps. No wasted cycles."
+chatgpt-scaling-shorts_scene6.mp3,Then there's this clever trick. A tiny model guesses the next few words. The big model just... checks if it's right. Three words for the price of one!
+chatgpt-scaling-shorts_scene7.mp3,So that's it. Cache your context. Batch your requests. Speculate to speed up. Follow for more System Design!
+deepseek-paper-reel_scene0.mp3,"Stop training your AI on internet garbage. Right now, most Vision-Language Models are fed billions of image-text pairs scraped from random webpages. It's noisy, it's full of ads, and the images have zero logical connection. It is essentially junk food for Artificial Intelligence."
+deepseek-paper-reel_scene1.mp3,"But a new paper just dropped the ultimate fix. It's called '2.5 Years in Class,' and the concept is genius. Instead of crawling the chaotic web, they literally sent the AI to school."
+deepseek-paper-reel_scene2.mp3,"They curated a massive dataset from 22,000 hours of instructional videos. We're talking Algebra, Physics, Engineering—real, foundational knowledge. But here is the catch: they didn't just dump the raw video files. That would be lazy. They built a 'Multimodal Textbook' pipeline."
+deepseek-paper-reel_scene3.mp3,"Here is the secret sauce: They used LLMs to extract the teacher's voice. Then, they used OCR to read the complex formulas written on the blackboard. Finally, they interleaved the video keyframes with that text in perfect, chronological order. They effectively turned video tutorials into a perfect, frame-by-frame textbook."
+deepseek-paper-reel_scene4.mp3,"This creates something web data can't offer: Coherence. In the paper, they proved that if you shuffle the images in a standard dataset, the model doesn't care. But if you shuffle this textbook? The performance tanks. That proves the model is actually learning the logic and reasoning between frames, not just memorizing pixels."
+deepseek-paper-reel_scene5.mp3,"The results are undeniable. Models pre-trained on this 'Textbook' absolutely destroyed the baselines on reasoning-heavy tasks like MathVista and ScienceQA. High-quality, dense knowledge beats massive scale every single time."
+deepseek-paper-reel_scene6.mp3,They even ran a 'Cheat Test' where they gave the answer in the context window. Web-trained models ignored it. This model? It actually paid attention and used the context to solve the problem.
+deepseek-paper-reel_scene7.mp3,"This is the future of Open Source AI. Less noise, more knowledge. Hit that subscribe button and visit the channel for point-to-point reviews of the latest research papers. I break down the papers no one else is reading."
+fastest-language-reel_scene1.mp3,Which coding language is the FASTEST? Let's find out.
+fastest-language-reel_scene2.mp3,"In one corner: Python, the beginner's favorite. JavaScript, the web king. C++, the old veteran. Go, the Google creation. And Rust, the new challenger."
+fastest-language-reel_scene3.mp3,We ran the same benchmark on all five. Fibonacci of 40. Pure CPU torture. Watch them race.
+fastest-language-reel_scene4.mp3,Rust wins at 0.8 seconds. C++ is right behind at 0.9. Go comes in third. JavaScript... 3.5 seconds. Not bad. And Python? 45 SECONDS. That's 50 times slower than Rust.
+fastest-language-reel_scene5.mp3,"But wait. Speed isn't everything. What about readability? Developer speed? Community support? Python might be slow, but it's the most popular language in the world for a reason."
+fastest-language-reel_scene6.mp3,So which one is YOUR favorite? Comment below! And be honest... are you a Python dev crying right now?
+netflix-recs-shorts_scene1.mp3,How does Netflix know exactly what you want to watch... before YOU do?
+netflix-recs-shorts_scene2.mp3,"It starts with scale. 230 Million users. 18,000 titles. That's billions of possible combinations."
+netflix-recs-shorts_scene3.mp3,"They track everything. Explicit signals like your thumbs up... and implicit ones, like what you rewound or binged."
+netflix-recs-shorts_scene4.mp3,"It's a massive funnel. They take thousands of candidates, filter them down to hundreds, and rank them instantly."
+netflix-recs-shorts_scene5.mp3,"Collaborative filtering finds users like you. If they watched Stranger Things, you probably will too."
+netflix-recs-shorts_scene6.mp3,Then comes Ranking. The algorithm scores every title based on the probability you'll actually hit play.
+netflix-recs-shorts_scene7.mp3,"It gets crazy. Even the thumbnail is personalized! You might see an action shot, while I see a romantic close-up."
+netflix-recs-shorts_scene8.mp3,"So remember: It's Data Collection, Filtering, Ranking, and Artwork Personalization. That's the secret sauce!"
+netflix-recs-shorts_scene9.mp3,Want more System Design secrets? Hit follow! Uber and Instagram are up next.
+python-fix-shorts_scene1.mp3,Ever wonder how Twitter handles... FIVE HUNDRED MILLION tweets... every single day? Let's break it down.
+python-fix-shorts_scene2.mp3,"Here's the thing. Millions of users, all wanting their timeline in under 200 milliseconds. That's faster than you can blink!"
+python-fix-shorts_scene3.mp3,"So how do they do it? Simple. Your request hits a CDN, then load balancers, then microservices, all backed by Redis and MySQL."
+python-fix-shorts_scene4.mp3,When you tweet... it gets stored in the database. But here's the magic — it's PUSHED to all your followers' timelines instantly.
+python-fix-shorts_scene5.mp3,And when YOU open your feed? Twitter just grabs it from Redis. No database hit. Boom! Instant timeline.
+python-fix-shorts_scene6.mp3,But wait... what about celebrities? Elon Musk has a hundred million followers. Fanning out to ALL of them? That would crash the system!
+python-fix-shorts_scene7.mp3,That's where sharding comes in. User data is split across multiple databases using a simple hash. No single server gets overwhelmed.
+python-fix-shorts_scene8.mp3,So remember: Fan-out on write... Redis caching... hybrid for celebrities... and sharded databases. THAT'S how Twitter scales!
+python-fix-shorts_scene9.mp3,Want more system design breakdowns? Hit that follow button! Netflix and Uber are coming next.
+python-riddle-shorts_scene1.mp3,Ever wonder how Twitter handles... FIVE HUNDRED MILLION tweets... every single day? Let's break it down.
+python-riddle-shorts_scene2.mp3,"Here's the thing. Millions of users, all wanting their timeline in under 200 milliseconds. That's faster than you can blink!"
+python-riddle-shorts_scene3.mp3,"So how do they do it? Simple. Your request hits a CDN, then load balancers, then microservices, all backed by Redis and MySQL."
+python-riddle-shorts_scene4.mp3,When you tweet... it gets stored in the database. But here's the magic — it's PUSHED to all your followers' timelines instantly.
+python-riddle-shorts_scene5.mp3,And when YOU open your feed? Twitter just grabs it from Redis. No database hit. Boom! Instant timeline.
+python-riddle-shorts_scene6.mp3,But wait... what about celebrities? Elon Musk has a hundred million followers. Fanning out to ALL of them? That would crash the system!
+python-riddle-shorts_scene7.mp3,That's where sharding comes in. User data is split across multiple databases using a simple hash. No single server gets overwhelmed.
+python-riddle-shorts_scene8.mp3,So remember: Fan-out on write... Redis caching... hybrid for celebrities... and sharded databases. THAT'S how Twitter scales!
+python-riddle-shorts_scene9.mp3,Want more system design breakdowns? Hit that follow button! Netflix and Uber are coming next.
+quantization-reel_scene1.mp3,Ever wonder how Twitter handles... FIVE HUNDRED MILLION tweets... every single day? Let's break it down.
+quantization-reel_scene2.mp3,"Here's the thing. Millions of users, all wanting their timeline in under 200 milliseconds. That's faster than you can blink!"
+quantization-reel_scene3.mp3,"So how do they do it? Simple. Your request hits a CDN, then load balancers, then microservices, all backed by Redis and MySQL."
+quantization-reel_scene4.mp3,When you tweet... it gets stored in the database. But here's the magic — it's PUSHED to all your followers' timelines instantly.
+quantization-reel_scene5.mp3,And when YOU open your feed? Twitter just grabs it from Redis. No database hit. Boom! Instant timeline.
+quantization-reel_scene6.mp3,But wait... what about celebrities? Elon Musk has a hundred million followers. Fanning out to ALL of them? That would crash the system!
+quantization-reel_scene7.mp3,That's where sharding comes in. User data is split across multiple databases using a simple hash. No single server gets overwhelmed.
+quantization-reel_scene8.mp3,So remember: Fan-out on write... Redis caching... hybrid for celebrities... and sharded databases. THAT'S how Twitter scales!
+quantization-reel_scene9.mp3,Want more system design breakdowns? Hit that follow button! Netflix and Uber are coming next.

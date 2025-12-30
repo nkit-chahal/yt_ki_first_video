@@ -4,13 +4,13 @@ import { Calculator, Atom, Wrench, BookOpen, Clock, Layers } from 'lucide-react'
 
 // Scene 2: The Dataset - "22,000 Hours"
 // Visual: Warm theme with animated counters
-const Scene2 = ({ playbackSpeed = 1 }) => {
+const Scene2 = ({ animSpeed = 1 }) => {
 
     const [hours, setHours] = useState(0);
     const [topics, setTopics] = useState(0);
 
     // Helper to scale time
-    const t = (val) => val / playbackSpeed;
+    const t = (val) => val / animSpeed;
 
     // Animated counter effect
     useEffect(() => {
@@ -44,7 +44,7 @@ const Scene2 = ({ playbackSpeed = 1 }) => {
             clearTimeout(safeTopicsTimeout);
             if (topicsInterval) clearInterval(topicsInterval);
         };
-    }, [playbackSpeed]);
+    }, [animSpeed]);
 
     const subjects = [
         { icon: Calculator, label: "Algebra", color: "#C4A77D" },

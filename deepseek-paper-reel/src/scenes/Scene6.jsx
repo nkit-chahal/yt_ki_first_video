@@ -4,10 +4,10 @@ import { Eye, Target, Check, X, FileSpreadsheet } from 'lucide-react';
 
 // Scene 6: Cheat Test - "100% Accuracy"
 // Visual: Warm theme table showing cheat test results
-const Scene6 = ({ playbackSpeed = 1 }) => {
+const Scene6 = ({ animSpeed = 1 }) => {
 
     // Helper to scale time
-    const t = (val) => val / playbackSpeed;
+    const t = (val) => val / animSpeed;
 
     // SFX: Ding for 100% highlight
     useEffect(() => {
@@ -15,7 +15,7 @@ const Scene6 = ({ playbackSpeed = 1 }) => {
         sfx.volume = 0.3;
         const timer = setTimeout(() => sfx.play().catch(() => { }), t(2000));
         return () => clearTimeout(timer);
-    }, [playbackSpeed]);
+    }, [animSpeed]);
 
     const testResults = [
         { model: "Web-Trained", accuracy: "12%", usedContext: false },

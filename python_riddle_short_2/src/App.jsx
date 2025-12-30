@@ -71,12 +71,13 @@ function App() {
         }
     }, [currentScene, hasStarted, isPlaying]); // Removed audioSpeed dependency to avoid seeking restart
 
-    // Audio Speed Updates
+    // Audio Speed Updates - Strictly decoupled from animation speed
     useEffect(() => {
         if (audioRef.current) {
+            // Ensure we are ONLY using audioSpeed here, never animSpeed
             audioRef.current.playbackRate = audioSpeed;
         }
-    }, [audioSpeed]);
+    }, [audioSpeed]); // Only run when audioSpeed changes
 
     // SFX Logic (Clock Ticking for Scene 2)
     useEffect(() => {
@@ -99,13 +100,15 @@ function App() {
         const audio = audioRef.current;
         if (!audio) return;
 
-        // Special case: Scene 2 (index 1) needs fixed 12s duration for reading time
+        // Special case: Scene 2 (index 1) needs fixed duration relative to animation speed
         if (currentScene === 1) {
+            // Base duration is 12 seconds, adjusted by animation speed
+            const duration = 12000 / animSpeed;
             const timer = setTimeout(() => {
                 if (isPlaying && hasStarted) {
                     setCurrentScene(s => s + 1);
                 }
-            }, 12000); // 12 seconds
+            }, duration);
             return () => clearTimeout(timer);
         }
 

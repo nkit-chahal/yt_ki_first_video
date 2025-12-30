@@ -146,6 +146,7 @@ function App() {
       const currentModule = MODULES[currentIndex];
       const rate = playbackRates[currentModule.id] || currentModule.defaultRate || 1.0;
       audioRef.current.playbackRate = rate;
+      console.log(`[DEBUG] Narration playbackRate set to: ${rate}x`);
     }
   }, [playbackRates, mode, currentIndex]);
 
@@ -154,11 +155,14 @@ function App() {
     const currentModule = MODULES[currentIndex];
     const animRate = animationRates[currentModule.id] || 1.0;
     gsap.globalTimeline.timeScale(animRate);
+    if (mode === 'DEBUG') {
+      console.log(`[DEBUG] GSAP timeScale set to: ${animRate}x`);
+    }
     return () => {
       // We generally leave the timeline scaled, or we could reset it. 
       // For consistent playback in Presentation mode, leaving it set by the persistence logic is correct.
     };
-  }, [animationRates, currentIndex]);
+  }, [animationRates, currentIndex, mode]);
 
 
   const handleNext = () => {
@@ -269,7 +273,7 @@ function App() {
 
             {/* Audio Speed */}
             <div className="flex flex-col">
-              <label className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Audio Speed</label>
+              <label className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Narration Speed</label>
               <div className="flex items-center gap-3">
                 <span className="font-mono text-lg font-bold text-slate-900 w-12 text-right">{currentRate}x</span>
                 <input

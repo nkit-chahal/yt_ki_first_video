@@ -4,10 +4,10 @@ import { User, MessageSquare, FileText, MonitorPlay, ScanText, BookOpen, ArrowRi
 
 // Scene 3: The Pipeline - "Multimodal Textbook"
 // Visual: Warm theme flowchart
-const Scene3 = ({ playbackSpeed = 1 }) => {
+const Scene3 = ({ animSpeed = 1 }) => {
 
     // Helper to scale time
-    const t = (val) => val / playbackSpeed;
+    const t = (val) => val / animSpeed;
 
     const pipelineSteps = [
         {

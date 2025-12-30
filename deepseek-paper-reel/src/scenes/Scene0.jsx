@@ -4,12 +4,12 @@ import { X, Image, MousePointer, Radio, Globe, AlertTriangle, Trash2 } from 'luc
 
 // Scene 0: The Hook - "Your Data is Garbage"
 // TIMED SEQUENCE synced with narration (~10 seconds)
-const Scene0 = ({ playbackSpeed = 1 }) => {
+const Scene0 = ({ animSpeed = 1 }) => {
 
     const [phase, setPhase] = useState(0);
 
     // Helper to scale time (speed 0.5 = 2x duration)
-    const t = (val) => val / playbackSpeed;
+    const t = (val) => val / animSpeed;
 
     useEffect(() => {
         // Reset phase when mounting or speed changes could be tricky, 
@@ -38,13 +38,13 @@ const Scene0 = ({ playbackSpeed = 1 }) => {
         const sfx = new Audio('/sfx/error.mp3');
         sfx.volume = 0.2;
         // Adjust sfx playback rate if supported?
-        sfx.playbackRate = playbackSpeed;
+        sfx.playbackRate = animSpeed;
         setTimeout(() => sfx.play().catch(() => { }), t(500));
 
         return () => timers.forEach(id => clearTimeout(id));
-    }, [playbackSpeed]); // Re-running this effect resets phase to 0? default useState is 0. 
+    }, [animSpeed]); // Re-running this effect resets phase to 0? default useState is 0. 
 
-    // If we include playbackSpeed in dependency, it restarts the scene phases from 0
+    // If we include animSpeed in dependency, it restarts the scene phases from 0
     // which puts it back in sync with the audio (which App.jsx might not reset).
     // App.jsx manages audio play state. We might need to coordinate.
     // But for now, restart visual is safer than desync.

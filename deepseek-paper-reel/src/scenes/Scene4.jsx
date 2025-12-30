@@ -4,10 +4,10 @@ import { Shuffle, Check, X, Brain, Globe, BookOpen } from 'lucide-react';
 
 // Scene 4: Coherence Test - "Logic Matters"
 // Visual: Warm theme split screen comparison
-const Scene4 = ({ playbackSpeed = 1 }) => {
+const Scene4 = ({ animSpeed = 1 }) => {
 
     // Helper to scale time
-    const t = (val) => val / playbackSpeed;
+    const t = (val) => val / animSpeed;
 
     // SFX: Error for the right side
     useEffect(() => {
@@ -17,7 +17,7 @@ const Scene4 = ({ playbackSpeed = 1 }) => {
         // We set timeout based on current speed.
         const timer = setTimeout(() => sfx.play().catch(() => { }), t(2500));
         return () => clearTimeout(timer);
-    }, [playbackSpeed]);
+    }, [animSpeed]);
 
     const ImageBlock = ({ delay, shuffle }) => (
         <motion.div

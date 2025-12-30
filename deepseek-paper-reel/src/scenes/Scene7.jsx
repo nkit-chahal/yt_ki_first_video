@@ -4,10 +4,10 @@ import { Youtube, Bell, FileText, Github, Sparkles, Play } from 'lucide-react';
 
 // Scene 7: CTA - Subscribe Animation
 // Visual: Warm theme with subscribe button
-const Scene7 = ({ playbackSpeed = 1 }) => {
+const Scene7 = ({ animSpeed = 1 }) => {
 
     // Helper to scale time
-    const t = (val) => val / playbackSpeed;
+    const t = (val) => val / animSpeed;
 
     return (
         <div className="w-full h-full flex flex-col items-center justify-center relative overflow-hidden"

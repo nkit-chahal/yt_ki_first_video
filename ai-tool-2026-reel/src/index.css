@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+@theme {
+    --font-sans: 'Inter', system-ui, sans-serif;
+
+    /* Beige/Orange Palette (from text_to_image_gen) */
+    --color-bg-cream: #FFFBF0;
+    --color-text-main: #2D241E;
+    --color-accent-orange: #EA580C;
+    --color-accent-yellow: #F59E0B;
+    --color-card-dark: #1C1917;
+    --color-card-light: #FDF4E3;
+
+    /* Animation Keyframes */
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+    }
+
+    @keyframes glitch {
+        0% { transform: translate(0); }
+        20% { transform: translate(-2px, 2px); }
+        40% { transform: translate(-2px, -2px); }
+        60% { transform: translate(2px, 2px); }
+        80% { transform: translate(2px, -2px); }
+        100% { transform: translate(0); }
+    }
+
+    @keyframes pulse-glow {
+        0%, 100% { box-shadow: 0 0 20px rgba(234, 88, 12, 0.4); }
+        50% { box-shadow: 0 0 60px rgba(234, 88, 12, 0.8); }
+    }
+}
+
+:root {
+    font-family: var(--font-sans);
+    background-color: #000;
+    color: var(--color-text-main);
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #000;
+    margin: 0;
+}
+
+/* 9:16 Vertical Video Container (Reels/Shorts) */
+.video-container {
+    width: 1080px;
+    height: 1920px;
+    background: var(--color-bg-cream);
+    position: relative;
+    overflow: hidden;
+    color: var(--color-text-main);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    transform: scale(0.5);
+    transform-origin: center center;
+}
+
+/* Dark Card */
+.dark-card {
+    background: var(--color-card-dark);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #FDBA74;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Light Card */
+.light-card {
+    background: var(--color-card-light);
+    border: 2px solid #FDE68A;
+    color: var(--color-text-main);
+    border-radius: 16px;
+}
+
+/* Highlight Text */
+.text-highlight {
+    color: var(--color-accent-orange);
+    font-weight: bold;
+}
+
+/* Glow Effects */
+.glow-orange {
+    box-shadow: 0 0 30px rgba(234, 88, 12, 0.3);
+}
+
+.animate-glitch {
+    animation: glitch 0.3s infinite;
+}
+
+.animate-pulse-glow {
+    animation: pulse-glow 2s infinite;
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Blink cursor */
+.blink {
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Gradient backgrounds */
+.gradient-orange {
+    background: linear-gradient(135deg, #EA580C 0%, #F59E0B 100%);
+}
+
+.gradient-dark {
+    background: linear-gradient(180deg, #1C1917 0%, #292524 100%);
+}

@@ -4,16 +4,16 @@ import { TrendingUp, Zap, Award } from 'lucide-react';
 
 // Scene 5: Results - "Reasoning Unlocked"
 // Visual: Warm theme with animated bar graphs
-const Scene5 = ({ playbackSpeed = 1 }) => {
+const Scene5 = ({ animSpeed = 1 }) => {
 
     // Helper to scale time
-    const t = (val) => val / playbackSpeed;
+    const t = (val) => val / animSpeed;
     const [animate, setAnimate] = useState(false);
 
     useEffect(() => {
         const timer = setTimeout(() => setAnimate(true), t(500));
         return () => clearTimeout(timer);
-    }, [playbackSpeed]);
+    }, [animSpeed]);
 
     // SFX: Success sound
     useEffect(() => {
@@ -22,7 +22,7 @@ const Scene5 = ({ playbackSpeed = 1 }) => {
         // Adjust rate?
         const timer = setTimeout(() => sfx.play().catch(() => { }), t(1500));
         return () => clearTimeout(timer);
-    }, [playbackSpeed]);
+    }, [animSpeed]);
 
     const benchmarks = [
         { name: "MathVista", gain: "+6%", value: 75, color: "#C4A77D" },
