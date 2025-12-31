@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // ElevenLabs configuration
-const ELEVENLABS_API_KEY = 'e1b496ee6899738732a7b99d0d4f7a1f2441a50cfa467cc510806b319a28128f';
+const ELEVENLABS_API_KEY = 'sk_272b002bec3ad74a7835d9e9bb1f9709e4909c030bdb0182';
 const VOICE_ID = 'UgBBYS2sOqTuMpoF3BR0';
 
 const NARRATION_STEPS = [
@@ -161,7 +161,7 @@ async function generateAudio(text, index) {
         },
         body: JSON.stringify({
             text: text,
-            model_id: 'eleven_monolingual_v1',
+            model_id: 'eleven_multilingual_v2',
             voice_settings: {
                 stability: 0.5,
                 similarity_boost: 0.75,
@@ -192,9 +192,10 @@ async function main() {
         process.exit(1);
     }
 
-    console.log(`Generating ${NARRATION_STEPS.length} audio files...`);
+    const START_INDEX = 85; // Resume from file 85
+    console.log(`Generating remaining files from index ${START_INDEX}...`);
 
-    for (let i = 0; i < NARRATION_STEPS.length; i++) {
+    for (let i = START_INDEX; i < NARRATION_STEPS.length; i++) {
         try {
             await generateAudio(NARRATION_STEPS[i], i);
             // Rate limit: wait 500ms between requests
