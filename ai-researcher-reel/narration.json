@@ -1,0 +1,92 @@
+{
+    "videoTitle": "Cursor: The #1 AI Coding Tool 2026",
+    "totalDuration": 40,
+    "scenes": [
+        {
+            "id": 0,
+            "title": "Hook",
+            "narration": [
+                {
+                    "text": "Most developers are still stuck with GitHub Copilot in 2025…",
+                    "time": 0
+                },
+                {
+                    "text": "but in 2026, everyone is switching to one free AI tool that writes entire features like a pro.",
+                    "time": 3.5
+                }
+            ],
+            "duration": 5
+        },
+        {
+            "id": 1,
+            "title": "Problem",
+            "narration": [
+                {
+                    "text": "Copilot gives you line-by-line suggestions.",
+                    "time": 0
+                },
+                {
+                    "text": "It’s helpful… but it doesn’t really understand your whole project.",
+                    "time": 2.5
+                }
+            ],
+            "duration": 5
+        },
+        {
+            "id": 2,
+            "title": "Reveal",
+            "narration": [
+                {
+                    "text": "Meet Cursor – an AI-first code editor built on VS Code.",
+                    "time": 0
+                }
+            ],
+            "duration": 4
+        },
+        {
+            "id": 3,
+            "title": "Demo",
+            "narration": [
+                {
+                    "text": "Watch this: I tell it 'Add user authentication to this Next.js app'…",
+                    "time": 0
+                },
+                {
+                    "text": "and boom – it creates the auth files, updates routes, adds environment variables, and even writes the login component – all in seconds.",
+                    "time": 4
+                }
+            ],
+            "duration": 10
+        },
+        {
+            "id": 4,
+            "title": "Why It's #1",
+            "narration": [
+                {
+                    "text": "Cursor has full project context, multi-file edits, built-in agents that run tasks autonomously, and an unlimited free tier.",
+                    "time": 0
+                },
+                {
+                    "text": "Devs are calling it faster and smarter than Copilot – and it’s completely free to start.",
+                    "time": 6
+                }
+            ],
+            "duration": 10
+        },
+        {
+            "id": 5,
+            "title": "CTA",
+            "narration": [
+                {
+                    "text": "If you want to code 2–3 times faster in 2026 – for interviews, placements, or real projects – you need to try Cursor today.",
+                    "time": 0
+                },
+                {
+                    "text": "Link in description. Drop a LIKE if you’re switching, comment your current AI tool below, and SUBSCRIBE for more must-know tech in 2026!",
+                    "time": 6
+                }
+            ],
+            "duration": 8
+        }
+    ]
+}
