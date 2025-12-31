@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thumbnail</title>
+    <!-- Load Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .thumbnail-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: black;
+            overflow: hidden;
+        }
+
+        /* Layer 1: Blurred Background Text */
+        .bg-text-layer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-6deg) scale(1.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1;
+            opacity: 0.4;
+            filter: blur(4px);
+            pointer-events: none;
+        }
+
+        .bg-text {
+            font-size: 22vw;
+            line-height: 0.8;
+            color: #1e40af;
+            /* blue-800 */
+            text-transform: uppercase;
+            font-weight: 900;
+            white-space: nowrap;
+        }
+
+        /* Layer 2: Foreground Content */
+        .content-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            display: flex;
+        }
+
+        /* Left: Yann Image */
+        .left-side {
+            width: 50%;
+            height: 100%;
+            position: relative;
+        }
+
+        .yann-image {
+            width: 100%;
+            height: 115%;
+            object-fit: cover;
+            object-position: top center;
+            transform: translateY(0%);
+            filter: contrast(1.1);
+        }
+
+        .fade-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, transparent 50%, #000 100%);
+        }
+
+        /* Right: Main Title */
+        .right-side {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding-left: 2%;
+            padding-right: 5%;
+        }
+
+        .text-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            transform: translateY(5%);
+        }
+
+        .main-text-red {
+            font-size: 13vw;
+            color: #ff0000;
+            line-height: 0.9;
+            text-transform: uppercase;
+            font-weight: 900;
+            white-space: nowrap;
+            /* Prevent wrapping */
+            text-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
+        }
+
+        .main-text-white {
+            font-size: 13vw;
+            color: #ffffff;
+            line-height: 0.9;
+            text-transform: uppercase;
+            font-weight: 900;
+            white-space: nowrap;
+            /* Prevent wrapping */
+            text-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="thumbnail-container">
+        <!-- Layer 0: Deep Background -->
+        <div style="position: absolute; inset:0; background: #000; z-index: 0;"></div>
+
+        <!-- Layer 1: Blurred Text "LEFT FACEBOOK" -->
+        <div class="bg-text-layer">
+            <span class="bg-text">LEFT</span>
+            <span class="bg-text">FACEBOOK</span>
+        </div>
+
+        <!-- Layer 2: Main Visuals -->
+        <div class="content-layer">
+            <div class="left-side">
+                <img src="yann-lecun.png" class="yann-image" alt="Yann LeCun">
+                <div class="fade-overlay"></div>
+            </div>
+
+            <div class="right-side">
+                <div class="text-group">
+                    <div class="main-text-red">END OF</div>
+                    <div class="main-text-white">LLMs?</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

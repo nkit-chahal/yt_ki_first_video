@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Clock, Play, Square, Bot, Watch, Cpu, Sparkles } from 'lucide-react';
 
 // Temporal Meaning Scene - Steps 47-53: Time awareness, action detection
-const TemporalScene = ({ step }) => {
+const TemporalScene = ({ step, progress = 0 }) => {
     return (
         <div className="w-full h-full flex flex-col items-center justify-center relative overflow-hidden bg-[#050505]">
             <div className="noise-overlay" />
@@ -18,16 +18,25 @@ const TemporalScene = ({ step }) => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                     >
-                        <p className="text-2xl text-gray-400 mb-6">Cheap model says:</p>
+                        <motion.p
+                            className="text-2xl text-gray-400 mb-6"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.1 ? 1 : 0 }}
+                        >
+                            Cheap model says:
+                        </motion.p>
 
                         <div className="flex gap-4">
                             {['"I see a bottle"', '"I see a bottle"', '"I see a bottle"'].map((text, i) => (
                                 <motion.div
                                     key={i}
                                     className="bg-gray-800 border border-gray-600 px-6 py-4 rounded-xl"
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 0.6, y: 0 }}
-                                    transition={{ delay: i * 0.2 }}
+                                    initial={{ y: 20, opacity: 0 }}
+                                    animate={{
+                                        opacity: progress > (0.25 + i * 0.2) ? 0.6 : 0,
+                                        y: progress > (0.25 + i * 0.2) ? 0 : 20
+                                    }}
+                                    transition={{ duration: 0.3 }}
                                 >
                                     <span className="text-gray-400">{text}</span>
                                 </motion.div>
@@ -45,16 +54,30 @@ const TemporalScene = ({ step }) => {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0 }}
                     >
-                        <p className="text-2xl text-gray-400 mb-6">VL-JEPA understands:</p>
+                        <motion.p
+                            className="text-2xl text-gray-400 mb-6"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.1 ? 1 : 0 }}
+                        >
+                            VL-JEPA understands:
+                        </motion.p>
 
                         <motion.div
                             className="bg-purple-500/20 border-2 border-purple-500 px-12 py-6 rounded-2xl"
-                            animate={{ scale: [1, 1.03, 1] }}
-                            transition={{ duration: 2, repeat: Infinity }}
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{
+                                scale: progress > 0.3 ? [1, 1.03, 1] : 0,
+                                opacity: progress > 0.3 ? 1 : 0
+                            }}
+                            transition={{ scale: { duration: 2, repeat: Infinity } }}
                         >
-                            <span className="text-3xl font-bold text-white">
+                            <motion.span
+                                className="text-3xl font-bold text-white"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: progress > 0.5 ? 1 : 0 }}
+                            >
                                 "The action is <span className="text-purple-400">picking up a canister</span>"
-                            </span>
+                            </motion.span>
                         </motion.div>
                     </motion.div>
                 )}
@@ -69,19 +92,32 @@ const TemporalScene = ({ step }) => {
                         exit={{ opacity: 0 }}
                     >
                         <motion.div
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                            initial={{ opacity: 0, scale: 0 }}
+                            animate={{
+                                opacity: progress > 0.1 ? 1 : 0,
+                                scale: progress > 0.1 ? 1 : 0,
+                                rotate: progress > 0.2 ? 360 : 0
+                            }}
+                            transition={{ rotate: { duration: 10, repeat: Infinity, ease: "linear" } }}
                         >
                             <Clock size={100} className="text-blue-500" />
                         </motion.div>
 
-                        <h1 className="text-5xl font-black text-white mt-8">
+                        <motion.h1
+                            className="text-5xl font-black text-white mt-8"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.4 ? 1 : 0 }}
+                        >
                             The Killer Difference?
-                        </h1>
+                        </motion.h1>
                         <motion.h2
                             className="text-7xl font-black text-blue-400 mt-4"
-                            animate={{ scale: [1, 1.1, 1] }}
-                            transition={{ duration: 1, repeat: Infinity }}
+                            initial={{ opacity: 0 }}
+                            animate={{
+                                opacity: progress > 0.6 ? 1 : 0,
+                                scale: progress > 0.6 ? [1, 1.1, 1] : 1
+                            }}
+                            transition={{ scale: { duration: 1, repeat: Infinity } }}
                         >
                             TIME
                         </motion.h2>
@@ -97,12 +133,20 @@ const TemporalScene = ({ step }) => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                     >
-                        <p className="text-2xl text-gray-400 mb-8">Cheap models think in:</p>
+                        <motion.p
+                            className="text-2xl text-gray-400 mb-8"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.1 ? 1 : 0 }}
+                        >
+                            Cheap models think in:
+                        </motion.p>
 
                         <div className="flex items-center gap-8">
                             <motion.div
                                 className="w-32 h-24 bg-gray-700 border-2 border-gray-600 rounded-xl flex items-center justify-center"
-                                animate={{ opacity: [0.5, 1, 0.5] }}
+                                animate={{
+                                    opacity: progress > 0.3 ? [0.5, 1, 0.5] : 0
+                                }}
                                 transition={{ duration: 1, repeat: Infinity }}
                             >
                                 <span className="text-gray-400">Single Frame</span>
@@ -112,8 +156,7 @@ const TemporalScene = ({ step }) => {
                         <motion.p
                             className="text-xl text-red-400 mt-8"
                             initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.5 }}
+                            animate={{ opacity: progress > 0.7 ? 1 : 0 }}
                         >
                             ❌ No sense of before and after
                         </motion.p>
@@ -129,14 +172,24 @@ const TemporalScene = ({ step }) => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                     >
-                        <p className="text-2xl text-gray-400 mb-8">VL-JEPA thinks in <span className="text-purple-400">temporal meaning</span></p>
+                        <motion.p
+                            className="text-2xl text-gray-400 mb-8"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.05 ? 1 : 0 }}
+                        >
+                            VL-JEPA thinks in <span className="text-purple-400">temporal meaning</span>
+                        </motion.p>
 
                         {/* Timeline */}
                         <div className="flex items-center gap-4">
                             <motion.div
                                 className="flex flex-col items-center"
-                                initial={{ opacity: 0, x: -20 }}
-                                animate={{ opacity: 1, x: 0 }}
+                                initial={{ x: -20, opacity: 0 }}
+                                animate={{
+                                    opacity: progress > 0.15 ? 1 : 0,
+                                    x: progress > 0.15 ? 0 : -20
+                                }}
+                                transition={{ duration: 0.3 }}
                             >
                                 <Play size={40} className="text-green-400" />
                                 <span className="text-green-400 font-bold mt-2">Starts</span>
@@ -145,15 +198,14 @@ const TemporalScene = ({ step }) => {
                             <motion.div
                                 className="w-48 h-2 bg-gradient-to-r from-green-500 via-blue-500 to-red-500 rounded-full"
                                 initial={{ scaleX: 0 }}
-                                animate={{ scaleX: 1 }}
-                                transition={{ delay: 0.3, duration: 0.5 }}
+                                animate={{ scaleX: progress > 0.3 ? 1 : 0 }}
+                                transition={{ duration: 0.5 }}
                             />
 
                             <motion.div
                                 className="flex flex-col items-center"
                                 initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: 0.5 }}
+                                animate={{ opacity: progress > 0.45 ? 1 : 0 }}
                             >
                                 <Clock size={40} className="text-blue-400" />
                                 <span className="text-blue-400 font-bold mt-2">Continues</span>
@@ -162,15 +214,18 @@ const TemporalScene = ({ step }) => {
                             <motion.div
                                 className="w-48 h-2 bg-gradient-to-r from-blue-500 to-red-500 rounded-full"
                                 initial={{ scaleX: 0 }}
-                                animate={{ scaleX: 1 }}
-                                transition={{ delay: 0.6, duration: 0.5 }}
+                                animate={{ scaleX: progress > 0.6 ? 1 : 0 }}
+                                transition={{ duration: 0.5 }}
                             />
 
                             <motion.div
                                 className="flex flex-col items-center"
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: 0.8 }}
+                                initial={{ x: 20, opacity: 0 }}
+                                animate={{
+                                    opacity: progress > 0.75 ? 1 : 0,
+                                    x: progress > 0.75 ? 0 : 20
+                                }}
+                                transition={{ duration: 0.3 }}
                             >
                                 <Square size={40} className="text-red-400" />
                                 <span className="text-red-400 font-bold mt-2">Ends</span>
@@ -188,7 +243,13 @@ const TemporalScene = ({ step }) => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                     >
-                        <h2 className="text-3xl font-bold text-gray-400 mb-8">Extremely useful for...</h2>
+                        <motion.h2
+                            className="text-3xl font-bold text-gray-400 mb-8"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.05 ? 1 : 0 }}
+                        >
+                            Extremely useful for...
+                        </motion.h2>
 
                         <div className="flex gap-12">
                             {[
@@ -201,8 +262,11 @@ const TemporalScene = ({ step }) => {
                                     key={item.label}
                                     className="flex flex-col items-center"
                                     initial={{ y: 30, opacity: 0 }}
-                                    animate={{ y: 0, opacity: 1 }}
-                                    transition={{ delay: i * 0.15 }}
+                                    animate={{
+                                        y: progress > (0.15 + i * 0.15) ? 0 : 30,
+                                        opacity: progress > (0.15 + i * 0.15) ? 1 : 0
+                                    }}
+                                    transition={{ duration: 0.3 }}
                                 >
                                     <item.icon size={50} className={item.color} />
                                     <span className={`${item.color} font-bold mt-2`}>{item.label}</span>
@@ -221,10 +285,20 @@ const TemporalScene = ({ step }) => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                     >
-                        <h2 className="text-3xl font-bold text-white mb-8">Why the Dot Cloud Matters</h2>
+                        <motion.h2
+                            className="text-3xl font-bold text-white mb-8"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.1 ? 1 : 0 }}
+                        >
+                            Why the Dot Cloud Matters
+                        </motion.h2>
 
                         {/* Mini dot cloud */}
-                        <div className="relative w-64 h-32 mb-6">
+                        <motion.div
+                            className="relative w-64 h-32 mb-6"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.25 ? 1 : 0 }}
+                        >
                             {[...Array(15)].map((_, i) => (
                                 <motion.div
                                     key={i}
@@ -234,22 +308,27 @@ const TemporalScene = ({ step }) => {
                                         top: `${40 + Math.sin(i) * 20}%`,
                                     }}
                                     animate={{
-                                        y: i === 14 ? 0 : [0, -5, 0],
-                                        scale: i === 14 ? [1, 1.3, 1] : 1,
+                                        y: progress > 0.3 ? (i === 14 ? 0 : [0, -5, 0]) : 0,
+                                        scale: progress > 0.3 ? (i === 14 ? [1, 1.3, 1] : 1) : 0,
+                                        opacity: progress > 0.3 ? 1 : 0,
                                     }}
                                     transition={{
                                         duration: 1.5,
                                         repeat: Infinity,
-                                        delay: i * 0.05,
+                                        delay: i * 0.03,
                                     }}
                                 />
                             ))}
-                        </div>
+                        </motion.div>
 
-                        <p className="text-xl text-gray-400 text-center max-w-xl">
+                        <motion.p
+                            className="text-xl text-gray-400 text-center max-w-xl"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.65 ? 1 : 0 }}
+                        >
                             Shows <span className="text-purple-400">meaning over time</span>, drifting frame to frame,
                             then <span className="text-blue-400">locking in</span> once enough evidence exists.
-                        </p>
+                        </motion.p>
                     </motion.div>
                 )}
             </AnimatePresence>
@@ -258,3 +337,4 @@ const TemporalScene = ({ step }) => {
 };
 
 export default TemporalScene;
+

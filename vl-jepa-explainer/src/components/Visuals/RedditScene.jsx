@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, ThumbsUp, ThumbsDown, Sparkles } from 'lucide-react';
 
 // Reddit Reaction Scene - Steps 104-109: Reddit comments scroll
-const RedditScene = ({ step }) => {
+const RedditScene = ({ step, progress = 0 }) => {
     return (
         <div className="w-full h-full flex flex-col items-center justify-center relative overflow-hidden bg-[#050505]">
             <div className="noise-overlay" />
@@ -20,14 +20,31 @@ const RedditScene = ({ step }) => {
                     >
                         <motion.div
                             className="w-20 h-20 bg-orange-500 rounded-full flex items-center justify-center mb-6"
-                            animate={{ rotate: [0, -10, 10, 0] }}
-                            transition={{ duration: 2, repeat: Infinity }}
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{
+                                scale: progress > 0.1 ? 1 : 0,
+                                opacity: progress > 0.1 ? 1 : 0,
+                                rotate: progress > 0.2 ? [0, -10, 10, 0] : 0
+                            }}
+                            transition={{ rotate: { duration: 2, repeat: Infinity } }}
                         >
                             <MessageCircle size={40} className="text-white" />
                         </motion.div>
 
-                        <h1 className="text-4xl font-bold text-white">Reddit Comments</h1>
-                        <p className="text-xl text-gray-400 mt-2">Some reactions...</p>
+                        <motion.h1
+                            className="text-4xl font-bold text-white"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.4 ? 1 : 0 }}
+                        >
+                            Reddit Comments
+                        </motion.h1>
+                        <motion.p
+                            className="text-xl text-gray-400 mt-2"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.65 ? 1 : 0 }}
+                        >
+                            Some reactions...
+                        </motion.p>
                     </motion.div>
                 )}
 
@@ -40,20 +57,36 @@ const RedditScene = ({ step }) => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -30 }}
                     >
-                        <div className="bg-gray-900 border border-gray-700 rounded-xl p-6">
-                            <div className="flex items-center gap-3 mb-3">
+                        <motion.div
+                            className="bg-gray-900 border border-gray-700 rounded-xl p-6"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.1 ? 1 : 0 }}
+                        >
+                            <motion.div
+                                className="flex items-center gap-3 mb-3"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: progress > 0.2 ? 1 : 0 }}
+                            >
                                 <div className="w-8 h-8 bg-gray-700 rounded-full" />
                                 <span className="text-gray-500 text-sm">u/skeptical_user</span>
-                            </div>
-                            <p className="text-white text-lg">
+                            </motion.div>
+                            <motion.p
+                                className="text-white text-lg"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: progress > 0.4 ? 1 : 0 }}
+                            >
                                 "Try to stop the video at any time to actually read what it says.
                                 <br />
                                 <span className="text-red-400 font-bold">It's really bad.</span>"
-                            </p>
-                            <div className="flex gap-4 mt-4">
+                            </motion.p>
+                            <motion.div
+                                className="flex gap-4 mt-4"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: progress > 0.7 ? 1 : 0 }}
+                            >
                                 <ThumbsDown size={18} className="text-gray-500" />
-                            </div>
-                        </div>
+                            </motion.div>
+                        </motion.div>
                     </motion.div>
                 )}
 
@@ -66,20 +99,36 @@ const RedditScene = ({ step }) => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -30 }}
                     >
-                        <div className="bg-gray-900 border border-gray-700 rounded-xl p-6">
-                            <div className="flex items-center gap-3 mb-3">
+                        <motion.div
+                            className="bg-gray-900 border border-gray-700 rounded-xl p-6"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.1 ? 1 : 0 }}
+                        >
+                            <motion.div
+                                className="flex items-center gap-3 mb-3"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: progress > 0.2 ? 1 : 0 }}
+                            >
                                 <div className="w-8 h-8 bg-blue-700 rounded-full" />
                                 <span className="text-gray-500 text-sm">u/defender123</span>
-                            </div>
-                            <p className="text-white text-lg">
+                            </motion.div>
+                            <motion.p
+                                className="text-white text-lg"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: progress > 0.4 ? 1 : 0 }}
+                            >
                                 "Wait, what? It's <span className="text-green-400">nowhere near 'most'</span>.
                                 <br />
                                 Most of the actions were <span className="text-green-400 font-bold">dead on</span>."
-                            </p>
-                            <div className="flex gap-4 mt-4">
+                            </motion.p>
+                            <motion.div
+                                className="flex gap-4 mt-4"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: progress > 0.7 ? 1 : 0 }}
+                            >
                                 <ThumbsUp size={18} className="text-green-500" />
-                            </div>
-                        </div>
+                            </motion.div>
+                        </motion.div>
                     </motion.div>
                 )}
 
@@ -92,20 +141,36 @@ const RedditScene = ({ step }) => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -30 }}
                     >
-                        <div className="bg-gray-900 border border-gray-700 rounded-xl p-6">
-                            <div className="flex items-center gap-3 mb-3">
+                        <motion.div
+                            className="bg-gray-900 border border-gray-700 rounded-xl p-6"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.1 ? 1 : 0 }}
+                        >
+                            <motion.div
+                                className="flex items-center gap-3 mb-3"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: progress > 0.2 ? 1 : 0 }}
+                            >
                                 <div className="w-8 h-8 bg-red-700 rounded-full" />
                                 <span className="text-gray-500 text-sm">u/tested_it</span>
-                            </div>
-                            <p className="text-white text-lg">
+                            </motion.div>
+                            <motion.p
+                                className="text-white text-lg"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: progress > 0.4 ? 1 : 0 }}
+                            >
                                 "I stopped at like 5 times and
                                 <br />
                                 <span className="text-red-400 font-bold">they were all wrong</span>."
-                            </p>
-                            <div className="flex gap-4 mt-4">
+                            </motion.p>
+                            <motion.div
+                                className="flex gap-4 mt-4"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: progress > 0.7 ? 1 : 0 }}
+                            >
                                 <ThumbsDown size={18} className="text-gray-500" />
-                            </div>
-                        </div>
+                            </motion.div>
+                        </motion.div>
                     </motion.div>
                 )}
 
@@ -118,20 +183,39 @@ const RedditScene = ({ step }) => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -30 }}
                     >
-                        <div className="bg-gray-900 border border-gray-700 rounded-xl p-6">
-                            <p className="text-gray-400 text-lg mb-4">Errors mentioned:</p>
+                        <motion.div
+                            className="bg-gray-900 border border-gray-700 rounded-xl p-6"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.1 ? 1 : 0 }}
+                        >
+                            <motion.p
+                                className="text-gray-400 text-lg mb-4"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: progress > 0.2 ? 1 : 0 }}
+                            >
+                                Errors mentioned:
+                            </motion.p>
                             <div className="flex flex-wrap gap-3">
-                                <div className="bg-red-500/20 border border-red-500/50 px-4 py-2 rounded-lg">
-                                    <span className="text-red-400">"Made up a slice of pizza"</span>
-                                </div>
-                                <div className="bg-red-500/20 border border-red-500/50 px-4 py-2 rounded-lg">
-                                    <span className="text-red-400">"Putting cucumber on table"</span>
-                                </div>
-                                <div className="bg-red-500/20 border border-red-500/50 px-4 py-2 rounded-lg">
-                                    <span className="text-red-400">"Nowhere near the table..."</span>
-                                </div>
+                                {[
+                                    '"Made up a slice of pizza"',
+                                    '"Putting cucumber on table"',
+                                    '"Nowhere near the table..."'
+                                ].map((error, i) => (
+                                    <motion.div
+                                        key={i}
+                                        className="bg-red-500/20 border border-red-500/50 px-4 py-2 rounded-lg"
+                                        initial={{ opacity: 0, scale: 0 }}
+                                        animate={{
+                                            opacity: progress > (0.3 + i * 0.2) ? 1 : 0,
+                                            scale: progress > (0.3 + i * 0.2) ? 1 : 0
+                                        }}
+                                        transition={{ type: "spring" }}
+                                    >
+                                        <span className="text-red-400">{error}</span>
+                                    </motion.div>
+                                ))}
                             </div>
-                        </div>
+                        </motion.div>
                     </motion.div>
                 )}
 
@@ -146,28 +230,39 @@ const RedditScene = ({ step }) => {
                     >
                         <motion.div
                             className="text-6xl mb-8"
-                            animate={{ rotate: [0, 10, -10, 0] }}
-                            transition={{ duration: 2, repeat: Infinity }}
+                            initial={{ opacity: 0, scale: 0 }}
+                            animate={{
+                                opacity: progress > 0.1 ? 1 : 0,
+                                scale: progress > 0.1 ? 1 : 0,
+                                rotate: progress > 0.2 ? [0, 10, -10, 0] : 0
+                            }}
+                            transition={{ rotate: { duration: 2, repeat: Infinity } }}
                         >
                             🤷
                         </motion.div>
 
-                        <p className="text-3xl text-white text-center">
+                        <motion.p
+                            className="text-3xl text-white text-center"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.3 ? 1 : 0 }}
+                        >
                             "Maybe just maybe..."
-                        </p>
+                        </motion.p>
                         <motion.p
                             className="text-2xl text-gray-400 mt-4 text-center"
                             initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.3 }}
+                            animate={{ opacity: progress > 0.5 ? 1 : 0 }}
                         >
                             I was completely distracted by
                         </motion.p>
                         <motion.p
                             className="text-3xl text-purple-400 font-bold mt-2"
-                            initial={{ scale: 0.8 }}
-                            animate={{ scale: 1 }}
-                            transition={{ delay: 0.5, type: "spring" }}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{
+                                opacity: progress > 0.65 ? 1 : 0,
+                                scale: progress > 0.65 ? 1 : 0.8
+                            }}
+                            transition={{ type: "spring" }}
                         >
                             how cool the dot cloud looked ✨
                         </motion.p>
@@ -176,8 +271,7 @@ const RedditScene = ({ step }) => {
                         <motion.div
                             className="relative w-48 h-24 mt-8"
                             initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.7 }}
+                            animate={{ opacity: progress > 0.8 ? 1 : 0 }}
                         >
                             {[...Array(10)].map((_, i) => (
                                 <motion.div
@@ -188,8 +282,8 @@ const RedditScene = ({ step }) => {
                                         top: `${40 + Math.sin(i) * 15}%`,
                                     }}
                                     animate={{
-                                        y: [0, -5, 0],
-                                        scale: i === 9 ? [1, 1.3, 1] : 1,
+                                        y: progress > 0.85 ? [0, -5, 0] : 0,
+                                        scale: progress > 0.85 ? (i === 9 ? [1, 1.3, 1] : 1) : 0,
                                     }}
                                     transition={{
                                         duration: 1.5,
@@ -207,3 +301,4 @@ const RedditScene = ({ step }) => {
 };
 
 export default RedditScene;
+

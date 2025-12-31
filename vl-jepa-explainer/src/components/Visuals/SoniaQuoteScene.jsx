@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Twitter, Quote, Atom, Brain, Lightbulb } from 'lucide-react';
 
 // Sonia Joseph Quote Scene - Steps 94-103: Sonia's quotes about JEPA thesis
-const SoniaQuoteScene = ({ step }) => {
+const SoniaQuoteScene = ({ step, progress = 0 }) => {
     return (
         <div className="w-full h-full flex flex-col items-center justify-center relative overflow-hidden bg-[#050505]">
             <div className="noise-overlay" />
@@ -20,14 +20,24 @@ const SoniaQuoteScene = ({ step }) => {
                     >
                         <motion.div
                             className="flex items-center gap-4 bg-black border border-gray-700 rounded-2xl px-8 py-4"
-                            initial={{ x: -30 }}
-                            animate={{ x: 0 }}
+                            initial={{ x: -30, opacity: 0 }}
+                            animate={{
+                                x: progress > 0.1 ? 0 : -30,
+                                opacity: progress > 0.1 ? 1 : 0
+                            }}
+                            transition={{ duration: 0.3 }}
                         >
                             <Twitter size={30} className="text-blue-400" />
                             <span className="text-white font-bold">@saborni_j</span>
                         </motion.div>
 
-                        <p className="text-2xl text-gray-400">Yann LeCun reposted this...</p>
+                        <motion.p
+                            className="text-2xl text-gray-400"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.5 ? 1 : 0 }}
+                        >
+                            Yann LeCun reposted this...
+                        </motion.p>
                     </motion.div>
                 )}
 
@@ -40,46 +50,76 @@ const SoniaQuoteScene = ({ step }) => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                     >
-                        <Quote size={40} className="text-pink-400 mb-6" />
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: progress > 0.1 ? 1 : 0 }}>
+                            <Quote size={40} className="text-pink-400 mb-6" />
+                        </motion.div>
 
                         {step === 95 && (
-                            <p className="text-3xl text-white text-center leading-relaxed">
+                            <motion.p
+                                className="text-3xl text-white text-center leading-relaxed"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: progress > 0.3 ? 1 : 0 }}
+                            >
                                 "The thesis behind JEPA is that our current models
                                 <br />
                                 are <span className="text-red-400 font-bold">NOT</span> predicting <span className="text-blue-400">causal dynamics</span>"
-                            </p>
+                            </motion.p>
                         )}
 
                         {step === 96 && (
                             <motion.div
                                 className="flex items-center gap-8"
-                                initial={{ y: 20 }}
-                                animate={{ y: 0 }}
+                                initial={{ y: 20, opacity: 0 }}
+                                animate={{
+                                    y: progress > 0.2 ? 0 : 20,
+                                    opacity: progress > 0.2 ? 1 : 0
+                                }}
+                                transition={{ duration: 0.3 }}
                             >
-                                <div className="relative">
+                                <motion.div
+                                    className="relative"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: progress > 0.35 ? 1 : 0 }}
+                                >
                                     <Atom size={80} className="text-gray-600" />
                                     <div className="absolute inset-0 flex items-center justify-center">
                                         <div className="w-20 h-1 bg-red-500 rotate-45" />
                                     </div>
-                                </div>
-                                <p className="text-2xl text-gray-400">
+                                </motion.div>
+                                <motion.p
+                                    className="text-2xl text-gray-400"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: progress > 0.55 ? 1 : 0 }}
+                                >
                                     We don't simulate every atom to model intelligence
-                                </p>
+                                </motion.p>
                             </motion.div>
                         )}
 
                         {step === 97 && (
                             <motion.div
                                 className="flex flex-col items-center"
-                                initial={{ scale: 0.95 }}
-                                animate={{ scale: 1 }}
+                                initial={{ scale: 0.95, opacity: 0 }}
+                                animate={{
+                                    scale: progress > 0.2 ? 1 : 0.95,
+                                    opacity: progress > 0.2 ? 1 : 0
+                                }}
+                                transition={{ duration: 0.3 }}
                             >
-                                <p className="text-3xl text-white text-center">
+                                <motion.p
+                                    className="text-3xl text-white text-center"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: progress > 0.35 ? 1 : 0 }}
+                                >
                                     "JEPA taught me the importance of learning physics"
-                                </p>
-                                <p className="text-2xl text-purple-400 mt-4">
+                                </motion.p>
+                                <motion.p
+                                    className="text-2xl text-purple-400 mt-4"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: progress > 0.6 ? 1 : 0 }}
+                                >
                                     at the <span className="font-bold">right level of abstraction</span>
-                                </p>
+                                </motion.p>
                             </motion.div>
                         )}
                     </motion.div>
@@ -96,14 +136,22 @@ const SoniaQuoteScene = ({ step }) => {
                     >
                         <motion.div
                             className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30 rounded-2xl px-12 py-8"
-                            animate={{ scale: [1, 1.02, 1] }}
-                            transition={{ duration: 2, repeat: Infinity }}
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{
+                                scale: progress > 0.1 ? [1, 1.02, 1] : 0,
+                                opacity: progress > 0.1 ? 1 : 0
+                            }}
+                            transition={{ scale: { duration: 2, repeat: Infinity } }}
                         >
-                            <p className="text-2xl text-white text-center italic">
+                            <motion.p
+                                className="text-2xl text-white text-center italic"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: progress > 0.4 ? 1 : 0 }}
+                            >
                                 "Thank you @ylecun and the JEPA team—
                                 <br />
                                 it was a <span className="text-purple-400">privilege</span> to work with you."
-                            </p>
+                            </motion.p>
                         </motion.div>
                     </motion.div>
                 )}
@@ -117,19 +165,29 @@ const SoniaQuoteScene = ({ step }) => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                     >
-                        <Quote size={40} className="text-pink-400 mb-6" />
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: progress > 0.1 ? 1 : 0 }}>
+                            <Quote size={40} className="text-pink-400 mb-6" />
+                        </motion.div>
 
                         {step === 99 && (
-                            <p className="text-3xl text-white text-center leading-relaxed">
+                            <motion.p
+                                className="text-3xl text-white text-center leading-relaxed"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: progress > 0.3 ? 1 : 0 }}
+                            >
                                 "If you predict in <span className="text-blue-400">latent space</span> and predict the future"
-                            </p>
+                            </motion.p>
                         )}
 
                         {step === 100 && (
                             <motion.p
                                 className="text-3xl text-white text-center leading-relaxed"
-                                initial={{ y: 20 }}
-                                animate={{ y: 0 }}
+                                initial={{ y: 20, opacity: 0 }}
+                                animate={{
+                                    y: progress > 0.2 ? 0 : 20,
+                                    opacity: progress > 0.2 ? 1 : 0
+                                }}
+                                transition={{ duration: 0.3 }}
                             >
                                 "You're more likely to <span className="text-green-400">abstract away</span>
                                 <br />
@@ -150,27 +208,45 @@ const SoniaQuoteScene = ({ step }) => {
                     >
                         {step === 101 && (
                             <>
-                                <Quote size={40} className="text-pink-400 mb-6" />
-                                <p className="text-3xl text-white text-center leading-relaxed">
+                                <motion.div initial={{ opacity: 0 }} animate={{ opacity: progress > 0.1 ? 1 : 0 }}>
+                                    <Quote size={40} className="text-pink-400 mb-6" />
+                                </motion.div>
+                                <motion.p
+                                    className="text-3xl text-white text-center leading-relaxed"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: progress > 0.3 ? 1 : 0 }}
+                                >
                                     "When we model this conversation right now..."
-                                </p>
-                                <p className="text-2xl text-gray-400 mt-4">
+                                </motion.p>
+                                <motion.p
+                                    className="text-2xl text-gray-400 mt-4"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: progress > 0.6 ? 1 : 0 }}
+                                >
                                     We don't model it down to the level of <span className="text-red-400">atoms</span>
-                                </p>
+                                </motion.p>
                             </>
                         )}
 
                         {step === 102 && (
                             <motion.div
                                 className="bg-red-500/10 border border-red-500/30 rounded-2xl px-12 py-6"
-                                initial={{ scale: 0.9 }}
-                                animate={{ scale: 1 }}
+                                initial={{ scale: 0.9, opacity: 0 }}
+                                animate={{
+                                    scale: progress > 0.2 ? 1 : 0.9,
+                                    opacity: progress > 0.2 ? 1 : 0
+                                }}
+                                transition={{ duration: 0.3 }}
                             >
-                                <p className="text-2xl text-red-400 text-center">
+                                <motion.p
+                                    className="text-2xl text-red-400 text-center"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: progress > 0.5 ? 1 : 0 }}
+                                >
                                     That would be <span className="font-bold">computationally costly</span>
                                     <br />
                                     and <span className="font-bold">inefficient</span>
-                                </p>
+                                </motion.p>
                             </motion.div>
                         )}
                     </motion.div>
@@ -185,26 +261,40 @@ const SoniaQuoteScene = ({ step }) => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                     >
-                        <Quote size={40} className="text-pink-400 mb-6" />
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: progress > 0.05 ? 1 : 0 }}>
+                            <Quote size={40} className="text-pink-400 mb-6" />
+                        </motion.div>
 
                         <motion.div
                             className="bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/30 rounded-2xl px-12 py-8"
-                            animate={{ boxShadow: ['0 0 30px rgba(139,92,246,0.2)', '0 0 50px rgba(139,92,246,0.3)', '0 0 30px rgba(139,92,246,0.2)'] }}
-                            transition={{ duration: 3, repeat: Infinity }}
+                            initial={{ opacity: 0, scale: 0 }}
+                            animate={{
+                                opacity: progress > 0.15 ? 1 : 0,
+                                scale: progress > 0.15 ? 1 : 0,
+                                boxShadow: progress > 0.3 ? ['0 0 30px rgba(139,92,246,0.2)', '0 0 50px rgba(139,92,246,0.3)', '0 0 30px rgba(139,92,246,0.2)'] : '0 0 0px transparent'
+                            }}
+                            transition={{ boxShadow: { duration: 3, repeat: Infinity } }}
                         >
-                            <p className="text-2xl text-white text-center leading-relaxed">
+                            <motion.p
+                                className="text-2xl text-white text-center leading-relaxed"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: progress > 0.4 ? 1 : 0 }}
+                            >
                                 "We model things at the <span className="text-purple-400 font-bold">representation level</span>
                                 <br />
                                 that enables it to <span className="text-blue-400">plan in the physical world</span>"
-                            </p>
+                            </motion.p>
                         </motion.div>
 
                         <div className="flex gap-6 mt-8">
                             <motion.div
                                 className="flex items-center gap-2 bg-green-500/10 border border-green-500/30 px-4 py-2 rounded-full"
-                                initial={{ opacity: 0, x: -20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: 0.3 }}
+                                initial={{ x: -20, opacity: 0 }}
+                                animate={{
+                                    opacity: progress > 0.65 ? 1 : 0,
+                                    x: progress > 0.65 ? 0 : -20
+                                }}
+                                transition={{ duration: 0.3 }}
                             >
                                 <Lightbulb size={20} className="text-green-400" />
                                 <span className="text-green-400">Counterfactual Reasoning</span>
@@ -212,9 +302,12 @@ const SoniaQuoteScene = ({ step }) => {
 
                             <motion.div
                                 className="flex items-center gap-2 bg-blue-500/10 border border-blue-500/30 px-4 py-2 rounded-full"
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: 0.4 }}
+                                initial={{ x: 20, opacity: 0 }}
+                                animate={{
+                                    opacity: progress > 0.8 ? 1 : 0,
+                                    x: progress > 0.8 ? 0 : 20
+                                }}
+                                transition={{ duration: 0.3 }}
                             >
                                 <Brain size={20} className="text-blue-400" />
                                 <span className="text-blue-400">Object Understanding</span>
@@ -228,3 +321,4 @@ const SoniaQuoteScene = ({ step }) => {
 };
 
 export default SoniaQuoteScene;
+

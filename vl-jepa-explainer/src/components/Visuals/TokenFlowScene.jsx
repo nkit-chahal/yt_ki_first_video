@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, ArrowRight, Clock, AlertCircle } from 'lucide-react';
 
 // Token Flow Scene - Steps 15-21: Generative system explanation, token-by-token generation
-const TokenFlowScene = ({ step }) => {
+const TokenFlowScene = ({ step, progress = 0 }) => {
     return (
         <div className="w-full h-full flex flex-col items-center justify-center relative overflow-hidden bg-[#050505]">
             <div className="noise-overlay" />
@@ -20,15 +20,27 @@ const TokenFlowScene = ({ step }) => {
                     >
                         <motion.div
                             className="bg-orange-500/10 border-2 border-orange-500 rounded-2xl px-12 py-8"
-                            initial={{ scale: 0.8 }}
-                            animate={{ scale: 1 }}
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{
+                                scale: progress > 0.1 ? 1 : 0.8,
+                                opacity: progress > 0.1 ? 1 : 0
+                            }}
+                            transition={{ duration: 0.4 }}
                         >
-                            <h1 className="text-5xl font-black text-orange-400 text-center">
+                            <motion.h1
+                                className="text-5xl font-black text-orange-400 text-center"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: progress > 0.3 ? 1 : 0 }}
+                            >
                                 GENERATIVE SYSTEM
-                            </h1>
-                            <p className="text-xl text-gray-400 text-center mt-2">
+                            </motion.h1>
+                            <motion.p
+                                className="text-xl text-gray-400 text-center mt-2"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: progress > 0.6 ? 1 : 0 }}
+                            >
                                 The Traditional Approach
-                            </p>
+                            </motion.p>
                         </motion.div>
                     </motion.div>
                 )}
@@ -42,7 +54,13 @@ const TokenFlowScene = ({ step }) => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                     >
-                        <p className="text-2xl text-gray-400 mb-8">Models like...</p>
+                        <motion.p
+                            className="text-2xl text-gray-400 mb-8"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.1 ? 1 : 0 }}
+                        >
+                            Models like...
+                        </motion.p>
 
                         <div className="flex gap-8">
                             {[
@@ -54,8 +72,11 @@ const TokenFlowScene = ({ step }) => {
                                     key={model.name}
                                     className={`${model.color} px-8 py-4 rounded-2xl shadow-lg`}
                                     initial={{ y: 30, opacity: 0 }}
-                                    animate={{ y: 0, opacity: 1 }}
-                                    transition={{ delay: i * 0.15 }}
+                                    animate={{
+                                        y: progress > (0.25 + i * 0.2) ? 0 : 30,
+                                        opacity: progress > (0.25 + i * 0.2) ? 1 : 0
+                                    }}
+                                    transition={{ duration: 0.3 }}
                                 >
                                     <span className="text-white text-2xl font-bold">{model.name}</span>
                                 </motion.div>
@@ -73,7 +94,13 @@ const TokenFlowScene = ({ step }) => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                     >
-                        <h2 className="text-3xl font-bold text-gray-400 mb-8">Produces tokens...</h2>
+                        <motion.h2
+                            className="text-3xl font-bold text-gray-400 mb-8"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.1 ? 1 : 0 }}
+                        >
+                            Produces tokens...
+                        </motion.h2>
 
                         <div className="flex gap-4">
                             {['TOKEN', 'TOKEN', 'TOKEN', '...'].map((token, i) => (
@@ -81,8 +108,11 @@ const TokenFlowScene = ({ step }) => {
                                     key={i}
                                     className="bg-orange-500/20 border border-orange-500 px-6 py-4 rounded-xl"
                                     initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: i * 0.3 }}
+                                    animate={{
+                                        opacity: progress > (0.2 + i * 0.15) ? 1 : 0,
+                                        y: progress > (0.2 + i * 0.15) ? 0 : 20
+                                    }}
+                                    transition={{ duration: 0.3 }}
                                 >
                                     <span className="text-orange-400 font-mono text-2xl">{token}</span>
                                 </motion.div>
@@ -92,8 +122,7 @@ const TokenFlowScene = ({ step }) => {
                         <motion.p
                             className="text-2xl text-white mt-8"
                             initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 1.2 }}
+                            animate={{ opacity: progress > 0.8 ? 1 : 0 }}
                         >
                             <span className="text-orange-400 font-bold">ONE</span> at a time
                         </motion.p>
@@ -114,19 +143,21 @@ const TokenFlowScene = ({ step }) => {
                                 <motion.div
                                     key={i}
                                     className="relative"
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: i * 0.2 }}
+                                    initial={{ opacity: 0 }}
+                                    animate={{
+                                        opacity: progress > (0.1 + i * 0.12) ? 1 : 0,
+                                        x: progress > (0.1 + i * 0.12) ? 0 : -20
+                                    }}
+                                    transition={{ duration: 0.3 }}
                                 >
                                     <div className="bg-gradient-to-r from-orange-500 to-red-500 px-4 py-2 rounded-lg">
                                         <span className="text-white font-bold text-xl">{word}</span>
                                     </div>
-                                    {i < 5 && (
+                                    {i < 5 && progress > (0.15 + i * 0.12) && (
                                         <motion.div
                                             className="absolute -right-4 top-1/2 -translate-y-1/2"
                                             initial={{ opacity: 0 }}
                                             animate={{ opacity: 1 }}
-                                            transition={{ delay: i * 0.2 + 0.1 }}
                                         >
                                             <ArrowRight size={16} className="text-gray-500" />
                                         </motion.div>
@@ -137,9 +168,7 @@ const TokenFlowScene = ({ step }) => {
 
                         <motion.p
                             className="text-xl text-gray-400 mt-8"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 1.4 }}
+                            animate={{ opacity: progress > 0.85 ? 1 : 0 }}
                         >
                             Word by word, <span className="text-orange-400">left to right</span>
                         </motion.p>
@@ -155,19 +184,38 @@ const TokenFlowScene = ({ step }) => {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0 }}
                     >
-                        <AlertCircle size={80} className="text-yellow-500 mb-6" />
+                        <motion.div
+                            animate={{
+                                opacity: progress > 0.1 ? 1 : 0,
+                                scale: progress > 0.1 ? 1 : 0
+                            }}
+                            transition={{ duration: 0.3 }}
+                        >
+                            <AlertCircle size={80} className="text-yellow-500 mb-6" />
+                        </motion.div>
 
-                        <h1 className="text-4xl font-bold text-white text-center">
+                        <motion.h1
+                            className="text-4xl font-bold text-white text-center"
+                            animate={{ opacity: progress > 0.3 ? 1 : 0 }}
+                        >
                             Every output must be
-                        </h1>
+                        </motion.h1>
                         <motion.h1
                             className="text-6xl font-black text-yellow-400 mt-2"
-                            animate={{ scale: [1, 1.05, 1] }}
-                            transition={{ duration: 1, repeat: Infinity }}
+                            animate={{
+                                opacity: progress > 0.5 ? 1 : 0,
+                                scale: progress > 0.5 ? [1, 1.05, 1] : 1
+                            }}
+                            transition={{ scale: { duration: 1, repeat: Infinity } }}
                         >
                             FULLY CERTAIN
                         </motion.h1>
-                        <p className="text-xl text-gray-500 mt-4">to exist</p>
+                        <motion.p
+                            className="text-xl text-gray-500 mt-4"
+                            animate={{ opacity: progress > 0.7 ? 1 : 0 }}
+                        >
+                            to exist
+                        </motion.p>
                     </motion.div>
                 )}
 
@@ -180,23 +228,33 @@ const TokenFlowScene = ({ step }) => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                     >
-                        <h2 className="text-3xl font-bold text-gray-400 mb-8">To answer a question...</h2>
+                        <motion.h2
+                            className="text-3xl font-bold text-gray-400 mb-8"
+                            animate={{ opacity: progress > 0.1 ? 1 : 0 }}
+                        >
+                            To answer a question...
+                        </motion.h2>
 
                         <div className="flex items-center gap-4">
                             <motion.div
                                 className="bg-gray-800 border border-gray-700 px-8 py-6 rounded-2xl"
-                                animate={{ opacity: [0.5, 1, 0.5] }}
+                                animate={{
+                                    opacity: progress > 0.2 ? [0.5, 1, 0.5] : 0
+                                }}
                                 transition={{ duration: 2, repeat: Infinity }}
                             >
                                 <span className="text-gray-400 text-2xl font-mono">Generating...</span>
                             </motion.div>
 
-                            <ArrowRight size={40} className="text-gray-600" />
+                            <motion.div
+                                animate={{ opacity: progress > 0.4 ? 1 : 0 }}
+                            >
+                                <ArrowRight size={40} className="text-gray-600" />
+                            </motion.div>
 
                             <motion.div
                                 className="bg-green-500/20 border border-green-500 px-8 py-6 rounded-2xl"
-                                initial={{ opacity: 0.3 }}
-                                animate={{ opacity: [0.3, 0.6, 0.3] }}
+                                animate={{ opacity: progress > 0.55 ? [0.3, 0.6, 0.3] : 0 }}
                                 transition={{ duration: 2, repeat: Infinity }}
                             >
                                 <span className="text-green-400/50 text-2xl">Final Answer?</span>
@@ -205,9 +263,7 @@ const TokenFlowScene = ({ step }) => {
 
                         <motion.p
                             className="text-xl text-red-400 mt-8"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.5 }}
+                            animate={{ opacity: progress > 0.75 ? 1 : 0 }}
                         >
                             ❌ Can't know until the <span className="font-bold">entire sentence</span> is finished
                         </motion.p>
@@ -226,18 +282,29 @@ const TokenFlowScene = ({ step }) => {
                         <div className="flex items-center gap-8">
                             <motion.div
                                 className="flex items-center gap-2"
-                                animate={{ scale: [1, 0.95, 1] }}
-                                transition={{ duration: 1, repeat: Infinity }}
+                                initial={{ opacity: 0, scale: 0 }}
+                                animate={{
+                                    opacity: progress > 0.1 ? 1 : 0,
+                                    scale: progress > 0.1 ? [1, 0.95, 1] : 0
+                                }}
+                                transition={{ scale: { duration: 1, repeat: Infinity } }}
                             >
                                 <Clock size={60} className="text-red-500" />
                                 <span className="text-5xl font-black text-red-400">SLOW</span>
                             </motion.div>
 
-                            <span className="text-4xl text-gray-600">&</span>
+                            <motion.span
+                                className="text-4xl text-gray-600"
+                                animate={{ opacity: progress > 0.4 ? 1 : 0 }}
+                            >
+                                &
+                            </motion.span>
 
                             <motion.span
                                 className="text-5xl font-black text-red-400"
-                                animate={{ opacity: [0.5, 1, 0.5] }}
+                                animate={{
+                                    opacity: progress > 0.6 ? [0.5, 1, 0.5] : 0
+                                }}
                                 transition={{ duration: 1.5, repeat: Infinity }}
                             >
                                 PAINFUL
@@ -251,3 +318,4 @@ const TokenFlowScene = ({ step }) => {
 };
 
 export default TokenFlowScene;
+

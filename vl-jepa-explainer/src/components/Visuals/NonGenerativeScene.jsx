@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, Brain, Eye, Video, Sparkles } from 'lucide-react';
 
 // Non-Generative Scene - Steps 7-11: ChatGPT comparison, internal understanding
-const NonGenerativeScene = ({ step }) => {
+const NonGenerativeScene = ({ step, progress = 0 }) => {
     return (
         <div className="w-full h-full flex flex-col items-center justify-center relative overflow-hidden bg-[#050505]">
             <div className="noise-overlay" />
@@ -20,8 +20,12 @@ const NonGenerativeScene = ({ step }) => {
                     >
                         <motion.div
                             className="flex items-center gap-6"
-                            animate={{ y: [0, -10, 0] }}
-                            transition={{ duration: 3, repeat: Infinity }}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{
+                                opacity: progress > 0.1 ? 1 : 0,
+                                y: progress > 0.1 ? [0, -10, 0] : 20
+                            }}
+                            transition={{ duration: 0.5, y: { duration: 3, repeat: Infinity } }}
                         >
                             <div className="w-24 h-24 bg-blue-600 rounded-2xl flex items-center justify-center">
                                 <span className="text-white text-4xl font-black">M</span>
@@ -35,8 +39,11 @@ const NonGenerativeScene = ({ step }) => {
                         <motion.div
                             className="mt-8 flex items-center gap-3 bg-purple-500/20 border border-purple-500/30 px-6 py-3 rounded-full"
                             initial={{ y: 20, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ delay: 0.3 }}
+                            animate={{
+                                y: progress > 0.5 ? 0 : 20,
+                                opacity: progress > 0.5 ? 1 : 0
+                            }}
+                            transition={{ duration: 0.4 }}
                         >
                             <Brain size={24} className="text-purple-400" />
                             <span className="text-purple-300 font-medium">Led by Yann LeCun</span>
@@ -57,28 +64,36 @@ const NonGenerativeScene = ({ step }) => {
                         <motion.div
                             className="flex flex-col items-center"
                             initial={{ x: -50, opacity: 0 }}
-                            animate={{ x: 0, opacity: 1 }}
+                            animate={{
+                                x: progress > 0.1 ? 0 : -50,
+                                opacity: progress > 0.1 ? 1 : 0
+                            }}
+                            transition={{ duration: 0.4 }}
                         >
                             <div className="w-32 h-32 bg-green-500/20 border-2 border-green-500 rounded-2xl flex items-center justify-center">
                                 <MessageSquare size={64} className="text-green-400" />
                             </div>
                             <span className="text-green-400 font-bold mt-4 text-xl">ChatGPT</span>
-                            <p className="text-gray-500 text-center mt-2">Generates words<br />one by one</p>
+                            <motion.p
+                                className="text-gray-500 text-center mt-2"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: progress > 0.3 ? 1 : 0 }}
+                            >
+                                Generates words<br />one by one
+                            </motion.p>
 
                             {/* Token animation */}
-                            <motion.div
-                                className="flex gap-2 mt-4"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: 0.5 }}
-                            >
+                            <motion.div className="flex gap-2 mt-4">
                                 {['The', 'cat', 'sat', '...'].map((word, i) => (
                                     <motion.span
                                         key={word}
                                         className="bg-green-500/30 px-3 py-1 rounded text-green-300 text-sm"
                                         initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: 0.6 + i * 0.2 }}
+                                        animate={{
+                                            opacity: progress > (0.4 + i * 0.1) ? 1 : 0,
+                                            y: progress > (0.4 + i * 0.1) ? 0 : 10
+                                        }}
+                                        transition={{ duration: 0.2 }}
                                     >
                                         {word}
                                     </motion.span>
@@ -89,25 +104,32 @@ const NonGenerativeScene = ({ step }) => {
                         {/* VS */}
                         <motion.div
                             className="text-4xl font-black text-gray-600"
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            transition={{ delay: 0.3 }}
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{
+                                scale: progress > 0.25 ? 1 : 0,
+                                opacity: progress > 0.25 ? 1 : 0
+                            }}
+                            transition={{ duration: 0.3 }}
                         >
                             VS
                         </motion.div>
 
-                        {/* VL-JEPA side (blurred initially) */}
+                        {/* VL-JEPA side */}
                         <motion.div
                             className="flex flex-col items-center"
                             initial={{ x: 50, opacity: 0 }}
-                            animate={{ x: 0, opacity: 1 }}
-                            transition={{ delay: 0.4 }}
+                            animate={{
+                                x: progress > 0.6 ? 0 : 50,
+                                opacity: progress > 0.6 ? 1 : 0
+                            }}
+                            transition={{ duration: 0.4 }}
                         >
                             <div className="w-32 h-32 bg-purple-500/20 border-2 border-purple-500 rounded-2xl flex items-center justify-center relative overflow-hidden">
                                 <Brain size={64} className="text-purple-400" />
                                 <motion.div
                                     className="absolute inset-0 bg-purple-500/30"
-                                    animate={{ opacity: [0.5, 0, 0.5] }}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: progress > 0.6 ? [0.5, 0, 0.5] : 0 }}
                                     transition={{ duration: 2, repeat: Infinity }}
                                 />
                             </div>
@@ -127,15 +149,28 @@ const NonGenerativeScene = ({ step }) => {
                         exit={{ opacity: 0 }}
                     >
                         <motion.div
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                            initial={{ opacity: 0, scale: 0 }}
+                            animate={{
+                                opacity: progress > 0.1 ? 1 : 0,
+                                scale: progress > 0.1 ? 1 : 0,
+                                rotate: progress > 0.1 ? 360 : 0
+                            }}
+                            transition={{
+                                opacity: { duration: 0.3 },
+                                scale: { duration: 0.3 },
+                                rotate: { duration: 8, repeat: Infinity, ease: "linear" }
+                            }}
                         >
                             <Sparkles size={80} className="text-yellow-400" />
                         </motion.div>
 
-                        <h1 className="text-6xl font-black text-white mt-8 text-center">
+                        <motion.h1
+                            className="text-6xl font-black text-white mt-8 text-center"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.4 ? 1 : 0 }}
+                        >
                             Completely <span className="text-purple-400">Different</span>
-                        </h1>
+                        </motion.h1>
                     </motion.div>
                 )}
 
@@ -150,8 +185,12 @@ const NonGenerativeScene = ({ step }) => {
                     >
                         <motion.div
                             className="bg-red-500/10 border-2 border-red-500 rounded-full px-12 py-6"
-                            animate={{ scale: [1, 1.05, 1] }}
-                            transition={{ duration: 2, repeat: Infinity }}
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{
+                                scale: progress > 0.1 ? [1, 1.05, 1] : 0,
+                                opacity: progress > 0.1 ? 1 : 0
+                            }}
+                            transition={{ scale: { duration: 2, repeat: Infinity } }}
                         >
                             <h1 className="text-5xl font-black text-red-400">
                                 NON-GENERATIVE
@@ -161,8 +200,11 @@ const NonGenerativeScene = ({ step }) => {
                         <motion.p
                             className="text-2xl text-gray-400 mt-6"
                             initial={{ y: 20, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ delay: 0.3 }}
+                            animate={{
+                                y: progress > 0.5 ? 0 : 20,
+                                opacity: progress > 0.5 ? 1 : 0
+                            }}
+                            transition={{ duration: 0.4 }}
                         >
                             Does NOT generate tokens
                         </motion.p>
@@ -182,7 +224,11 @@ const NonGenerativeScene = ({ step }) => {
                         <motion.div
                             className="flex flex-col gap-4"
                             initial={{ x: -50, opacity: 0 }}
-                            animate={{ x: 0, opacity: 1 }}
+                            animate={{
+                                x: progress > 0.1 ? 0 : -50,
+                                opacity: progress > 0.1 ? 1 : 0
+                            }}
+                            transition={{ duration: 0.4 }}
                         >
                             <div className="flex gap-4">
                                 <div className="w-24 h-24 bg-gray-700 rounded-xl flex items-center justify-center">
@@ -195,12 +241,15 @@ const NonGenerativeScene = ({ step }) => {
                             <span className="text-gray-500 text-center">Images & Video</span>
                         </motion.div>
 
-                        {/* Arrow */}
+                        {/* Arrow 1 */}
                         <motion.div
                             className="text-4xl text-purple-400"
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            transition={{ delay: 0.3 }}
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{
+                                scale: progress > 0.25 ? 1 : 0,
+                                opacity: progress > 0.25 ? 1 : 0
+                            }}
+                            transition={{ duration: 0.3 }}
                         >
                             →
                         </motion.div>
@@ -209,15 +258,22 @@ const NonGenerativeScene = ({ step }) => {
                         <motion.div
                             className="relative"
                             initial={{ scale: 0.8, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            transition={{ delay: 0.4 }}
+                            animate={{
+                                scale: progress > 0.4 ? 1 : 0.8,
+                                opacity: progress > 0.4 ? 1 : 0
+                            }}
+                            transition={{ duration: 0.4 }}
                         >
                             <div className="w-40 h-40 bg-purple-500/20 border-2 border-purple-500 rounded-full flex items-center justify-center">
                                 <Brain size={60} className="text-purple-400" />
                             </div>
                             <motion.div
                                 className="absolute inset-0 bg-purple-500/20 rounded-full"
-                                animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0, 0.5] }}
+                                initial={{ opacity: 0 }}
+                                animate={{
+                                    scale: progress > 0.4 ? [1, 1.3, 1] : 1,
+                                    opacity: progress > 0.4 ? [0.5, 0, 0.5] : 0
+                                }}
                                 transition={{ duration: 2, repeat: Infinity }}
                             />
                             <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-purple-300 font-medium whitespace-nowrap">
@@ -225,12 +281,15 @@ const NonGenerativeScene = ({ step }) => {
                             </span>
                         </motion.div>
 
-                        {/* Arrow */}
+                        {/* Arrow 2 */}
                         <motion.div
                             className="text-4xl text-gray-500"
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            transition={{ delay: 0.5 }}
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{
+                                scale: progress > 0.6 ? 1 : 0,
+                                opacity: progress > 0.6 ? 1 : 0
+                            }}
+                            transition={{ duration: 0.3 }}
                         >
                             →
                         </motion.div>
@@ -239,8 +298,11 @@ const NonGenerativeScene = ({ step }) => {
                         <motion.div
                             className="flex flex-col items-center"
                             initial={{ x: 50, opacity: 0 }}
-                            animate={{ x: 0, opacity: 1 }}
-                            transition={{ delay: 0.6 }}
+                            animate={{
+                                x: progress > 0.75 ? 0 : 50,
+                                opacity: progress > 0.75 ? 1 : 0
+                            }}
+                            transition={{ duration: 0.4 }}
                         >
                             <div className="w-32 h-24 bg-gray-800 rounded-xl flex items-center justify-center border border-gray-700">
                                 <MessageSquare size={40} className="text-gray-500" />
@@ -257,3 +319,5 @@ const NonGenerativeScene = ({ step }) => {
 };
 
 export default NonGenerativeScene;
+
+

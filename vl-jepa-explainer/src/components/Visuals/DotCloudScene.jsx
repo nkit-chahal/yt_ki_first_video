@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Circle, HelpCircle, Eye } from 'lucide-react';
 
 // Dot Cloud Scene - Steps 31-36: Red/Blue dot visualization
-const DotCloudScene = ({ step }) => {
+const DotCloudScene = ({ step, progress = 0 }) => {
     return (
         <div className="w-full h-full flex flex-col items-center justify-center relative overflow-hidden bg-[#050505]">
             <div className="noise-overlay" />
@@ -18,12 +18,22 @@ const DotCloudScene = ({ step }) => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                     >
-                        <h2 className="text-3xl font-bold text-gray-400 mb-8">What you're looking at...</h2>
+                        <motion.h2
+                            className="text-3xl font-bold text-gray-400 mb-8"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.1 ? 1 : 0 }}
+                        >
+                            What you're looking at...
+                        </motion.h2>
 
                         <motion.div
                             className="relative w-96 h-64 bg-gray-900/50 rounded-2xl border border-gray-700 overflow-hidden"
-                            initial={{ scale: 0.9 }}
-                            animate={{ scale: 1 }}
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{
+                                scale: progress > 0.2 ? 1 : 0.9,
+                                opacity: progress > 0.2 ? 1 : 0
+                            }}
+                            transition={{ duration: 0.4 }}
                         >
                             {/* Animated dots */}
                             {[...Array(30)].map((_, i) => (
@@ -35,14 +45,14 @@ const DotCloudScene = ({ step }) => {
                                         top: `${10 + Math.random() * 80}%`,
                                     }}
                                     animate={{
-                                        x: [0, Math.random() * 20 - 10, 0],
-                                        y: [0, Math.random() * 20 - 10, 0],
-                                        opacity: [0.5, 1, 0.5],
+                                        x: progress > 0.3 ? [0, Math.random() * 20 - 10, 0] : 0,
+                                        y: progress > 0.3 ? [0, Math.random() * 20 - 10, 0] : 0,
+                                        opacity: progress > 0.3 ? [0.5, 1, 0.5] : 0,
                                     }}
                                     transition={{
                                         duration: 2 + Math.random(),
                                         repeat: Infinity,
-                                        delay: Math.random(),
+                                        delay: Math.random() * 0.5,
                                     }}
                                 />
                             ))}
@@ -50,9 +60,12 @@ const DotCloudScene = ({ step }) => {
 
                         <motion.p
                             className="text-xl text-white mt-6"
-                            initial={{ y: 20, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ delay: 0.3 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{
+                                y: progress > 0.6 ? 0 : 20,
+                                opacity: progress > 0.6 ? 1 : 0
+                            }}
+                            transition={{ duration: 0.4 }}
                         >
                             A <span className="text-purple-400">Map</span> of Internal Understanding Over Time
                         </motion.p>
@@ -71,8 +84,12 @@ const DotCloudScene = ({ step }) => {
                         {/* Single dot highlight */}
                         <motion.div
                             className="relative"
-                            animate={{ scale: [1, 1.1, 1] }}
-                            transition={{ duration: 1.5, repeat: Infinity }}
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{
+                                scale: progress > 0.1 ? [1, 1.1, 1] : 0,
+                                opacity: progress > 0.1 ? 1 : 0
+                            }}
+                            transition={{ scale: { duration: 1.5, repeat: Infinity } }}
                         >
                             <div className="w-24 h-24 bg-red-500 rounded-full shadow-[0_0_40px_rgba(239,68,68,0.5)]" />
                             <motion.div
@@ -82,13 +99,32 @@ const DotCloudScene = ({ step }) => {
                             />
                         </motion.div>
 
-                        <div>
-                            <h1 className="text-4xl font-bold text-white">Each Dot =</h1>
-                            <p className="text-2xl text-gray-400 mt-2">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.3 ? 1 : 0 }}
+                        >
+                            <motion.h1
+                                className="text-4xl font-bold text-white"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: progress > 0.4 ? 1 : 0 }}
+                            >
+                                Each Dot =
+                            </motion.h1>
+                            <motion.p
+                                className="text-2xl text-gray-400 mt-2"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: progress > 0.55 ? 1 : 0 }}
+                            >
                                 What the AI <span className="text-purple-400">thinks</span> is happening
-                            </p>
-                            <p className="text-xl text-gray-500 mt-1">at that moment</p>
-                        </div>
+                            </motion.p>
+                            <motion.p
+                                className="text-xl text-gray-500 mt-1"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: progress > 0.7 ? 1 : 0 }}
+                            >
+                                at that moment
+                            </motion.p>
+                        </motion.div>
                     </motion.div>
                 )}
 
@@ -107,15 +143,33 @@ const DotCloudScene = ({ step }) => {
                                     key={i}
                                     className="w-12 h-12 bg-red-500 rounded-full shadow-lg"
                                     initial={{ scale: 0 }}
-                                    animate={{ scale: 1 }}
-                                    transition={{ delay: i * 0.1 }}
+                                    animate={{ scale: progress > (0.1 + i * 0.1) ? 1 : 0 }}
+                                    transition={{ duration: 0.3 }}
                                 />
                             ))}
                         </div>
 
-                        <h1 className="text-5xl font-black text-red-400">RED DOTS</h1>
-                        <p className="text-2xl text-gray-400 mt-4">= Instant Guesses</p>
-                        <p className="text-xl text-gray-500 mt-2">(might be wrong)</p>
+                        <motion.h1
+                            className="text-5xl font-black text-red-400"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.6 ? 1 : 0 }}
+                        >
+                            RED DOTS
+                        </motion.h1>
+                        <motion.p
+                            className="text-2xl text-gray-400 mt-4"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.75 ? 1 : 0 }}
+                        >
+                            = Instant Guesses
+                        </motion.p>
+                        <motion.p
+                            className="text-xl text-gray-500 mt-2"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.85 ? 1 : 0 }}
+                        >
+                            (might be wrong)
+                        </motion.p>
                     </motion.div>
                 )}
 
@@ -130,8 +184,12 @@ const DotCloudScene = ({ step }) => {
                     >
                         <motion.div
                             className="relative mb-8"
-                            animate={{ scale: [1, 1.1, 1] }}
-                            transition={{ duration: 2, repeat: Infinity }}
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{
+                                scale: progress > 0.1 ? [1, 1.1, 1] : 0,
+                                opacity: progress > 0.1 ? 1 : 0
+                            }}
+                            transition={{ scale: { duration: 2, repeat: Infinity } }}
                         >
                             <div className="w-32 h-32 bg-blue-500 rounded-full shadow-[0_0_60px_rgba(59,130,246,0.6)]" />
                             <motion.div
@@ -141,9 +199,27 @@ const DotCloudScene = ({ step }) => {
                             />
                         </motion.div>
 
-                        <h1 className="text-5xl font-black text-blue-400">BLUE DOT</h1>
-                        <p className="text-2xl text-gray-400 mt-4">= Stabilized Understanding</p>
-                        <p className="text-xl text-green-400 mt-2">✓ Confident Answer</p>
+                        <motion.h1
+                            className="text-5xl font-black text-blue-400"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.4 ? 1 : 0 }}
+                        >
+                            BLUE DOT
+                        </motion.h1>
+                        <motion.p
+                            className="text-2xl text-gray-400 mt-4"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.6 ? 1 : 0 }}
+                        >
+                            = Stabilized Understanding
+                        </motion.p>
+                        <motion.p
+                            className="text-xl text-green-400 mt-2"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.8 ? 1 : 0 }}
+                        >
+                            ✓ Confident Answer
+                        </motion.p>
                     </motion.div>
                 )}
 
@@ -156,14 +232,31 @@ const DotCloudScene = ({ step }) => {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0 }}
                     >
-                        <HelpCircle size={80} className="text-yellow-400 mb-6" />
+                        <motion.div
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{
+                                opacity: progress > 0.1 ? 1 : 0,
+                                scale: progress > 0.1 ? 1 : 0
+                            }}
+                            transition={{ duration: 0.3 }}
+                        >
+                            <HelpCircle size={80} className="text-yellow-400 mb-6" />
+                        </motion.div>
 
-                        <h1 className="text-4xl font-bold text-white text-center">
+                        <motion.h1
+                            className="text-4xl font-bold text-white text-center"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.3 ? 1 : 0 }}
+                        >
                             But wait... How is this different from
-                        </h1>
-                        <p className="text-3xl text-gray-400 mt-4 text-center">
+                        </motion.h1>
+                        <motion.p
+                            className="text-3xl text-gray-400 mt-4 text-center"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.6 ? 1 : 0 }}
+                        >
                             a cheap vision model just describing what it sees?
-                        </p>
+                        </motion.p>
                     </motion.div>
                 )}
 
@@ -176,7 +269,13 @@ const DotCloudScene = ({ step }) => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                     >
-                        <p className="text-2xl text-gray-400 mb-8">Cheap models are like...</p>
+                        <motion.p
+                            className="text-2xl text-gray-400 mb-8"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.1 ? 1 : 0 }}
+                        >
+                            Cheap models are like...
+                        </motion.p>
 
                         <div className="flex gap-4">
                             {['"I see a hand"', '"I see a bottle"', '"Then second..."', '"Then third..."'].map((text, i) => (
@@ -184,8 +283,11 @@ const DotCloudScene = ({ step }) => {
                                     key={i}
                                     className="bg-gray-800 border border-gray-700 px-4 py-3 rounded-xl"
                                     initial={{ x: -20, opacity: 0 }}
-                                    animate={{ x: 0, opacity: 1 }}
-                                    transition={{ delay: i * 0.2 }}
+                                    animate={{
+                                        x: progress > (0.2 + i * 0.15) ? 0 : -20,
+                                        opacity: progress > (0.2 + i * 0.15) ? 1 : 0
+                                    }}
+                                    transition={{ duration: 0.3 }}
                                 >
                                     <span className="text-gray-400">{text}</span>
                                 </motion.div>
@@ -195,8 +297,7 @@ const DotCloudScene = ({ step }) => {
                         <motion.p
                             className="text-xl text-gray-500 mt-8"
                             initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 1 }}
+                            animate={{ opacity: progress > 0.85 ? 1 : 0 }}
                         >
                             Until it finishes the entire sentence...
                         </motion.p>
@@ -208,3 +309,4 @@ const DotCloudScene = ({ step }) => {
 };
 
 export default DotCloudScene;
+

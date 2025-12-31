@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Bot, Watch, Cpu, Zap, ArrowRight } from 'lucide-react';
 
 // Implications Scene - Steps 12-14: Semantic space, robotics, wearables, agents
-const ImplicationsScene = ({ step }) => {
+const ImplicationsScene = ({ step, progress = 0 }) => {
     return (
         <div className="w-full h-full flex flex-col items-center justify-center relative overflow-hidden bg-[#050505]">
             <div className="noise-overlay" />
@@ -22,8 +22,12 @@ const ImplicationsScene = ({ step }) => {
                             {/* Semantic Space */}
                             <motion.div
                                 className="flex flex-col items-center"
-                                initial={{ scale: 0.8 }}
-                                animate={{ scale: 1 }}
+                                initial={{ scale: 0.8, opacity: 0 }}
+                                animate={{
+                                    scale: progress > 0.1 ? 1 : 0.8,
+                                    opacity: progress > 0.1 ? 1 : 0
+                                }}
+                                transition={{ duration: 0.4 }}
                             >
                                 <div className="w-40 h-40 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center shadow-[0_0_50px_rgba(139,92,246,0.4)]">
                                     <Cpu size={60} className="text-white" />
@@ -34,8 +38,7 @@ const ImplicationsScene = ({ step }) => {
                             <motion.div
                                 className="text-3xl text-gray-500"
                                 initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: 0.3 }}
+                                animate={{ opacity: progress > 0.3 ? 1 : 0 }}
                             >
                                 vs
                             </motion.div>
@@ -43,9 +46,12 @@ const ImplicationsScene = ({ step }) => {
                             {/* Token Space */}
                             <motion.div
                                 className="flex flex-col items-center opacity-50"
-                                initial={{ scale: 0.8 }}
-                                animate={{ scale: 1 }}
-                                transition={{ delay: 0.2 }}
+                                initial={{ scale: 0.8, opacity: 0 }}
+                                animate={{
+                                    scale: progress > 0.4 ? 1 : 0.8,
+                                    opacity: progress > 0.4 ? 0.5 : 0
+                                }}
+                                transition={{ duration: 0.4 }}
                             >
                                 <div className="w-40 h-40 bg-gray-700 rounded-full flex items-center justify-center border-2 border-gray-600">
                                     <span className="text-gray-400 text-4xl font-mono">T₁T₂T₃</span>
@@ -55,19 +61,17 @@ const ImplicationsScene = ({ step }) => {
                         </div>
 
                         {/* Benefits */}
-                        <motion.div
-                            className="flex gap-6 mt-12"
-                            initial={{ y: 20, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ delay: 0.5 }}
-                        >
+                        <motion.div className="flex gap-6 mt-12">
                             {['⚡ Faster', '💡 Efficient', '📉 Half Parameters', '📈 Better Performance'].map((benefit, i) => (
                                 <motion.div
                                     key={benefit}
                                     className="bg-green-500/10 border border-green-500/30 px-4 py-2 rounded-full"
                                     initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.6 + i * 0.1 }}
+                                    animate={{
+                                        opacity: progress > (0.55 + i * 0.1) ? 1 : 0,
+                                        y: progress > (0.55 + i * 0.1) ? 0 : 10
+                                    }}
+                                    transition={{ duration: 0.3 }}
                                 >
                                     <span className="text-green-400">{benefit}</span>
                                 </motion.div>
@@ -87,7 +91,8 @@ const ImplicationsScene = ({ step }) => {
                     >
                         <motion.h2
                             className="text-4xl font-bold text-white mb-12"
-                            animate={{ opacity: [0.7, 1, 0.7] }}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: progress > 0.05 ? [0.7, 1, 0.7] : 0 }}
                             transition={{ duration: 2, repeat: Infinity }}
                         >
                             What This Means For...
@@ -103,12 +108,15 @@ const ImplicationsScene = ({ step }) => {
                                     key={item.label}
                                     className="flex flex-col items-center"
                                     initial={{ y: 50, opacity: 0 }}
-                                    animate={{ y: 0, opacity: 1 }}
-                                    transition={{ delay: i * 0.2 }}
+                                    animate={{
+                                        y: progress > (0.2 + i * 0.2) ? 0 : 50,
+                                        opacity: progress > (0.2 + i * 0.2) ? 1 : 0
+                                    }}
+                                    transition={{ duration: 0.4 }}
                                 >
                                     <motion.div
                                         className={`w-32 h-32 bg-gradient-to-br ${item.color} rounded-3xl flex items-center justify-center shadow-lg`}
-                                        animate={{ y: [0, -10, 0] }}
+                                        animate={{ y: progress > (0.2 + i * 0.2) ? [0, -10, 0] : 0 }}
                                         transition={{ duration: 2, delay: i * 0.3, repeat: Infinity }}
                                     >
                                         <item.icon size={60} className="text-white" />
@@ -121,8 +129,8 @@ const ImplicationsScene = ({ step }) => {
                         <motion.p
                             className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-400 mt-12"
                             initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            transition={{ delay: 0.8, type: "spring" }}
+                            animate={{ scale: progress > 0.85 ? 1 : 0 }}
+                            transition={{ type: "spring" }}
                         >
                             🤯 Super Crazy!
                         </motion.p>
@@ -140,13 +148,20 @@ const ImplicationsScene = ({ step }) => {
                     >
                         <motion.div
                             className="flex items-center gap-4"
-                            animate={{ x: [0, 20, 0] }}
-                            transition={{ duration: 1.5, repeat: Infinity }}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{
+                                opacity: progress > 0.1 ? 1 : 0,
+                                x: progress > 0.1 ? [0, 20, 0] : -20
+                            }}
+                            transition={{ x: { duration: 1.5, repeat: Infinity } }}
                         >
                             <Zap size={60} className="text-yellow-400" />
-                            <h1 className="text-6xl font-black text-white">
+                            <motion.h1
+                                className="text-6xl font-black text-white"
+                                animate={{ opacity: progress > 0.3 ? 1 : 0 }}
+                            >
                                 Let's Get Into This
-                            </h1>
+                            </motion.h1>
                             <ArrowRight size={60} className="text-purple-400" />
                         </motion.div>
                     </motion.div>
@@ -157,3 +172,4 @@ const ImplicationsScene = ({ step }) => {
 };
 
 export default ImplicationsScene;
+
